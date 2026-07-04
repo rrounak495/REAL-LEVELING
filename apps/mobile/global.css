@@ -1,0 +1,20 @@
+/**
+ * global.css — NativeWind v4 base stylesheet
+ *
+ * This file is the single CSS entry point for NativeWind.
+ * It imports Tailwind's base directives and defines any global
+ * CSS custom properties we need at the root level.
+ *
+ * Imported in: app/_layout.tsx
+ */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Dark mode is the only mode. No light-mode variables needed. */
+    color-scheme: dark;
+  }
+}

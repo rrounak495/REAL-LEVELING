@@ -1,0 +1,58 @@
+{
+  "expo": {
+    "name": "Real Leveling",
+    "slug": "real-leveling",
+    "version": "0.1.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "scheme": "realleveling",
+    "userInterfaceStyle": "dark",
+    "newArchEnabled": true,
+    "splash": {
+      "image": "./assets/splash-icon.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#03030A"
+    },
+    "ios": {
+      "supportsTablet": false,
+      "bundleIdentifier": "com.realleveling.app",
+      "buildNumber": "1"
+    },
+    "android": {
+      "package": "com.realleveling.app",
+      "versionCode": 1,
+      "adaptiveIcon": {
+        "backgroundColor": "#03030A",
+        "foregroundImage": "./assets/android-icon-foreground.png",
+        "backgroundImage": "./assets/android-icon-background.png"
+      },
+      "permissions": [
+        "android.permission.RECEIVE_BOOT_COMPLETED"
+      ]
+    },
+    "plugins": [
+      "expo-router",
+      "expo-font",
+      [
+        "expo-splash-screen",
+        {
+          "backgroundColor": "#03030A",
+          "image": "./assets/splash-icon.png",
+          "imageWidth": 200
+        }
+      ]
+    ],
+    "experiments": {
+      "typedRoutes": false
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "61eaf520-0488-43f2-a0cd-074d5645fb05"
+      }
+    },
+    "owner": "rrounak49"
+  }
+}
