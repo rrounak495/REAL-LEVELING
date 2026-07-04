@@ -1,0 +1,36 @@
+{
+  "name": "real-leveling",
+  "version": "0.0.1",
+  "private": true,
+  "description": "Real Leveling — Gamified Self-Improvement App",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "mobile": "npm run --prefix apps/mobile start",
+    "android": "npm run --prefix apps/mobile android",
+    "lint": "npm run --prefix apps/mobile lint",
+    "typecheck": "npm run --prefix apps/mobile typecheck",
+    "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md}\" --ignore-path .prettierignore",
+    "prepare": "husky"
+  },
+  "devDependencies": {
+    "husky": "^9.1.7",
+    "lint-staged": "^15.5.2",
+    "prettier": "^3.3.0",
+    "turbo": "^2.0.0"
+  },
+  "lint-staged": {
+    "apps/mobile/**/*.{ts,tsx}": [
+      "eslint --fix --max-warnings=0",
+      "prettier --write"
+    ],
+    "**/*.{json,md,yml}": [
+      "prettier --write"
+    ]
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}
