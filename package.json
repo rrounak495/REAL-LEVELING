@@ -13,7 +13,7 @@
     "lint": "npm run --prefix apps/mobile lint",
     "typecheck": "npm run --prefix apps/mobile typecheck",
     "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md}\" --ignore-path .prettierignore",
-    "prepare": "husky"
+    "prepare": "node -e \"if (process.env.CI !== 'true') { try { require('child_process').execSync('husky') } catch (e) {} }\""
   },
   "devDependencies": {
     "husky": "^9.1.7",
@@ -23,7 +23,7 @@
   },
   "lint-staged": {
     "apps/mobile/**/*.{ts,tsx}": [
-      "eslint --fix --max-warnings=0",
+      "npm run --prefix apps/mobile lint:staged --",
       "prettier --write"
     ],
     "**/*.{json,md,yml}": [
