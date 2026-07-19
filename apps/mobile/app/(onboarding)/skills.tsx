@@ -24,50 +24,50 @@ const STATIC_SKILLS = [
   {
     id: 'running',
     name: 'Running',
-    description: 'Track your cardio and stamina',
+    description: 'Cardio, stamina, and pacing',
     categoryIcon: '🏃',
   },
   {
     id: 'weightlifting',
     name: 'Weightlifting',
-    description: 'Build raw strength',
+    description: 'Raw strength and hypertrophy',
     categoryIcon: '🏋️',
   },
   {
-    id: 'reading',
-    name: 'Reading',
-    description: 'Knowledge intake and retention',
-    categoryIcon: '📚',
+    id: 'calisthenics',
+    name: 'Calisthenics',
+    description: 'Bodyweight mastery and control',
+    categoryIcon: '🤸',
   },
   {
-    id: 'coding',
-    name: 'Coding',
-    description: 'Software development practice',
-    categoryIcon: '💻',
+    id: 'swimming',
+    name: 'Swimming',
+    description: 'Full body endurance and breath work',
+    categoryIcon: '🏊',
   },
   {
-    id: 'meditation',
-    name: 'Meditation',
-    description: 'Mental clarity and focus',
+    id: 'yoga',
+    name: 'Yoga',
+    description: 'Flexibility, mobility, and balance',
     categoryIcon: '🧘',
   },
   {
-    id: 'cooking',
-    name: 'Cooking',
-    description: 'Nutrition and culinary skills',
-    categoryIcon: '🍳',
+    id: 'martial_arts',
+    name: 'Martial Arts',
+    description: 'Combat technique, speed, and agility',
+    categoryIcon: '🥋',
   },
   {
-    id: 'journaling',
-    name: 'Journaling',
-    description: 'Reflection and habit tracking',
-    categoryIcon: '📝',
+    id: 'cycling',
+    name: 'Cycling',
+    description: 'Lower body endurance and stamina',
+    categoryIcon: '🚴',
   },
   {
-    id: 'language',
-    name: 'Language Learning',
-    description: 'Acquire a new language',
-    categoryIcon: '🌍',
+    id: 'stretching',
+    name: 'Stretching',
+    description: 'Recovery and injury prevention',
+    categoryIcon: '🤸‍♂️',
   },
 ];
 
@@ -91,10 +91,10 @@ export default function SkillsScreen() {
   return (
     <ScreenContainer>
       <View style={styles.container}>
-        <ProgressStepper currentStep={3} totalSteps={5} />
+        <ProgressStepper currentStep={4} totalSteps={6} />
 
         <View style={styles.header}>
-          <Text style={styles.step}>STEP 4 OF 5</Text>
+          <Text style={styles.step}>STEP 5 OF 6</Text>
           <Text style={styles.title}>Pick Your Skills</Text>
           <Text style={styles.subtitle}>
             Choose up to 5 skills to start leveling. You can add more later.

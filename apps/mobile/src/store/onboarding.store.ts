@@ -23,39 +23,25 @@ export interface OnboardingGoal {
 
 export const ONBOARDING_GOALS: OnboardingGoal[] = [
   {
-    id: 'physical_strength',
-    label: 'Physical Strength',
-    description: 'Build muscle, increase fitness and endurance',
+    id: 'weight_loss',
+    label: 'Weight Loss',
+    description: 'Burn calories, lose fat, and lean out with intense cardio and circuits.',
+    icon: '🔥',
+    statFocus: 'vit',
+  },
+  {
+    id: 'muscle_gain',
+    label: 'Muscle Gain',
+    description: 'Build raw strength, increase muscle mass, and lift heavier weights.',
     icon: '💪',
     statFocus: 'str',
   },
   {
-    id: 'mental_mastery',
-    label: 'Mental Mastery',
-    description: 'Sharpen intellect, learn new skills, study',
-    icon: '🧠',
-    statFocus: 'int',
-  },
-  {
-    id: 'vitality',
-    label: 'Vitality',
-    description: 'Improve health, sleep, nutrition and recovery',
-    icon: '❤️',
-    statFocus: 'vit',
-  },
-  {
-    id: 'wisdom',
-    label: 'Wisdom',
-    description: 'Build discipline, consistency and mindfulness',
+    id: 'general_fitness',
+    label: 'General Fitness',
+    description: 'A balanced approach to overall health, mobility, and discipline.',
     icon: '🧘',
     statFocus: 'wis',
-  },
-  {
-    id: 'charisma',
-    label: 'Charisma',
-    description: 'Improve social skills, leadership and presence',
-    icon: '✨',
-    statFocus: 'cha',
   },
 ];
 
@@ -63,17 +49,25 @@ export const ONBOARDING_GOALS: OnboardingGoal[] = [
 interface OnboardingState {
   username: string;
   displayName: string;
-  selectedGoalIds: string[];
+  fitnessGoal: 'weight_loss' | 'muscle_gain' | 'general_fitness' | null;
+  fitnessExperience: 'beginner' | 'intermediate' | 'experienced' | null;
+  trainingLocation: 'home' | 'gym' | 'both' | null;
+  availableDailyTime: 15 | 30 | 45 | 60 | null;
   selectedSkillIds: string[];
   notificationsGranted: boolean;
+  gender: 'male' | 'female' | null;
 }
 
 interface OnboardingActions {
   setUsername: (username: string) => void;
   setDisplayName: (name: string) => void;
-  toggleGoal: (goalId: string) => void;
+  setFitnessGoal: (goal: 'weight_loss' | 'muscle_gain' | 'general_fitness') => void;
+  setFitnessExperience: (exp: 'beginner' | 'intermediate' | 'experienced') => void;
+  setTrainingLocation: (loc: 'home' | 'gym' | 'both') => void;
+  setAvailableDailyTime: (time: 15 | 30 | 45 | 60) => void;
   toggleSkill: (skillId: string) => void;
   setNotificationsGranted: (granted: boolean) => void;
+  setGender: (gender: 'male' | 'female') => void;
   reset: () => void;
 }
 
@@ -82,9 +76,13 @@ type OnboardingStore = OnboardingState & OnboardingActions;
 const INITIAL_STATE: OnboardingState = {
   username: '',
   displayName: '',
-  selectedGoalIds: [],
+  fitnessGoal: null,
+  fitnessExperience: null,
+  trainingLocation: null,
+  availableDailyTime: null,
   selectedSkillIds: [],
   notificationsGranted: false,
+  gender: null,
 };
 
 export const useOnboardingStore = create<OnboardingStore>()(
@@ -104,17 +102,27 @@ export const useOnboardingStore = create<OnboardingStore>()(
         });
       },
 
-      toggleGoal: (goalId) => {
+      setFitnessGoal: (goal) => {
         set((state) => {
-          const idx = state.selectedGoalIds.indexOf(goalId);
-          if (idx === -1) {
-            // Max 3 goals
-            if (state.selectedGoalIds.length < 3) {
-              state.selectedGoalIds.push(goalId);
-            }
-          } else {
-            state.selectedGoalIds.splice(idx, 1);
-          }
+          state.fitnessGoal = goal;
+        });
+      },
+
+      setFitnessExperience: (exp) => {
+        set((state) => {
+          state.fitnessExperience = exp;
+        });
+      },
+
+      setTrainingLocation: (loc) => {
+        set((state) => {
+          state.trainingLocation = loc;
+        });
+      },
+
+      setAvailableDailyTime: (time) => {
+        set((state) => {
+          state.availableDailyTime = time;
         });
       },
 
@@ -135,6 +143,12 @@ export const useOnboardingStore = create<OnboardingStore>()(
       setNotificationsGranted: (granted) => {
         set((state) => {
           state.notificationsGranted = granted;
+        });
+      },
+
+      setGender: (gender) => {
+        set((state) => {
+          state.gender = gender;
         });
       },
 

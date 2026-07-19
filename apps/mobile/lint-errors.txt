@@ -1,0 +1,733 @@
+﻿
+C:\Users\rroun\Downloads\REAL LEVLING\apps\mobile\app\(app)\(tabs)\_layout.tsx
+  9:10  warning  'colors' is defined but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\rroun\Downloads\REAL LEVLING\apps\mobile\app\(app)\(tabs)\feed.tsx
+  10:10  warning  'Link' is defined but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\rroun\Downloads\REAL LEVLING\apps\mobile\app\(app)\(tabs)\index.tsx
+   13:10  warning  'supabase' is defined but never used                                                                                                                                                                                                            @typescript-eslint/no-unused-vars
+   36:5   warning  'totalXp' is assigned a value but never used                                                                                                                                                                                                    @typescript-eslint/no-unused-vars
+   45:11  warning  'activeJourney' is assigned a value but never used                                                                                                                                                                                              @typescript-eslint/no-unused-vars
+   45:26  warning  'todaysObjective' is assigned a value but never used                                                                                                                                                                                            @typescript-eslint/no-unused-vars
+   81:6   warning  React Hook useEffect has missing dependencies: 'currentLevel', 'fetchActiveBosses', 'fetchActiveJourney', 'fetchAvatarData', 'fetchProgression', 'initializeSystem', and 'refreshInsights'. Either include them or remove the dependency array  react-hooks/exhaustive-deps
+  155:28  error    Unexpected any. Specify a different type                                                                                                                                                                                                        @typescript-eslint/no-explicit-any
+  157:78  error    Unexpected any. Specify a different type                                                                                                                                                                                                        @typescript-eslint/no-explicit-any
+  196:65  error    Unexpected any. Specify a different type                                                                                                                                                                                                        @typescript-eslint/no-explicit-any
+  244:63  error    Unexpected any. Specify a different type                                                                                                                                                                                                        @typescript-eslint/no-explicit-any
+
+C:\Users\rroun\Downloads\REAL LEVLING\apps\mobile\app\(app)\(tabs)\profile.tsx
+   5:21  warning  'useState' is defined but never used                                                                                                                                @typescript-eslint/no-unused-vars
+  36:6   warning  React Hook useEffect has missing dependencies: 'fetchAvatarData', 'fetchGuildData', and 'initializeLifeEngine'. Either include them or remove the dependency array  react-hooks/exhaustive-deps
+
+C:\Users\rroun\Downloads\REAL LEVLING\apps\mobile\app\(app)\(tabs)\ranks.tsx
+  124:28  warning  'friends' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\rroun\Downloads\REAL LEVLING\apps\mobile\app\(app)\(tabs)\tasks.tsx
+  16:30  warning  'radius' is defined but never used                                                                                                          @typescript-eslint/no-unused-vars
+  29:6   warning  React Hook useEffect has missing dependencies: 'fetchAchievementData' and 'initialize'. Either include them or remove the dependency array  react-hooks/exhaustive-deps
+
+C:\Users\rroun\Downloads\REAL LEVLING\apps\mobile\app\(app)\boss\[id].tsx
+   61:7   error    Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+C:\Users\rroun\Downloads\REAL LEVLING\apps\mobile\app\(app)\boss\[id].tsx:61:7
+  59 |   useEffect(() => {
+  60 |     if (currentBossObjectives.length > 0 && !selectedObjectiveId) {
+> 61 |       setSelectedObjectiveId(currentBossObjectives[0]?.id || '');
+     |       ^^^^^^^^^^^^^^^^^^^^^^ Avoid calling setState() directly within an effect
+  62 |     }
+  63 |   }, [currentBossObjectives]);
+  64 |  react-hooks/set-state-in-effect
+   63:6   warning  React Hook useEffect has a missing dependency: 'selectedObjectiveId'. Either include it or remove the dependency array                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             react-hooks/exhaustive-deps
+   79:42  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           @typescript-eslint/no-explicit-any
+  116:22  error    React Hook "useAnimatedStyle" is called conditionally. React Hooks must be called in the exact same order in every component render. Did you accidentally call a React Hook after an early return?                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 react-hooks/rules-of-hooks
+
+C:\Users\rroun\Downloads\REAL LEVLING\apps\mobile\app\(app)\boss\index.tsx
+   2:57  warning  'Image' is defined but never used          @typescript-eslint/no-unused-vars
+  16:11  warning  'user' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  26:33  error    Unexpected any. Specify a different type   @typescript-eslint/no-explicit-any
+  53:64  error    Unexpected any. Specify a different type   @typescript-eslint/no-explicit-any
+
+C:\Users\rroun\Downloads\REAL LEVLING\apps\mobile\app\(app)\guild\index.tsx
+   11:39  warning  'radius' is defined but never used                                                                                 @typescript-eslint/no-unused-vars
+   15:11  warning  'width' is assigned a value but never used                                                                         @typescript-eslint/no-unused-vars
+   29:6   warning  React Hook useEffect has a missing dependency: 'fetchGuildData'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+  180:88  error    Unexpected any. Specify a different type                                                                           @typescript-eslint/no-explicit-any
+  208:82  error    Unexpected any. Specify a different type                                                                           @typescript-eslint/no-explicit-any
+
+C:\Users\rroun\Downloads\REAL LEVLING\apps\mobile\app\(app)\journey\intro.tsx
+  2:28  warning  'Text' is defined but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\rroun\Downloads\REAL LEVLING\apps\mobile\app\(app)\journey\map.tsx
+  7:39  warning  'radius' is defined but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\rroun\Downloads\REAL LEVLING\apps\mobile\app\(app)\journey\select.tsx
+  10:10  warning  'GlassCard' is defined but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\rroun\Downloads\REAL LEVLING\apps\mobile\app\(app)\journey\success.tsx
+   1:17  warning  'useEffect' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     @typescript-eslint/no-unused-vars
+  10:39  warning  'radius' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        @typescript-eslint/no-unused-vars
+  15:42  error    Error: Cannot call impure function during render
+
+`Math.random` is an impure function. Calling an impure function can produce unstable results that update unpredictably when the component happens to re-render. (https://react.dev/reference/rules/components-and-hooks-must-be-pure#components-and-hooks-must-be-idempotent).
+
+C:\Users\rroun\Downloads\REAL LEVLING\apps\mobile\app\(app)\journey\success.tsx:15:42
+  13 |   const router = useRouter();
+  14 |   const { activeJourney, todaysObjective } = useJourneyStore();
+> 15 |   const [xpGained] = useState(Math.floor(Math.random() * 100) + 150); // Simulated XP
+     |                                          ^^^^^^^^^^^^^ Cannot call impure function
+  16 |
+  17 |   const handleReturnHome = () => {
+  18 |     router.replace('/(app)/(tabs)/');  react-hooks/purity
+
+C:\Users\rroun\Downloads\REAL LEVLING\apps\mobile\app\(app)\journey\today.tsx
+   9:3   warning  'StyleProp' is defined but never used                                                                                                                                                              @typescript-eslint/no-unused-vars
+  10:3   warning  'ViewStyle' is defined but never used                                                                                                                                                              @typescript-eslint/no-unused-vars
+  22:39  warning  'radius' is defined but never used                                                                                                                                                                 @typescript-eslint/no-unused-vars
+  86:24  error    React Hook "useSessionStore" is called conditionally. React Hooks must be called in the exact same order in every component render. Did you accidentally call a React Hook after an early return?  react-hooks/rules-of-hooks
+
+C:\Users\rroun\Downloads\REAL LEVLING\apps\mobile\app\(app)\memory-vault.tsx
+  9:39  warning  'radius' is defined but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\rroun\Downloads\REAL LEVLING\apps\mobile\app\(app)\notifications.tsx
+  8:30  warning  'radius' is defined but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\rroun\Downloads\REAL LEVLING\apps\mobile\app\(app)\planner.tsx
+   5:8   warning  'Animated' is defined but never used      @typescript-eslint/no-unused-vars
+   5:20  warning  'FadeInDown' is defined but never used    @typescript-eslint/no-unused-vars
+  11:39  warning  'radius' is defined but never used        @typescript-eslint/no-unused-vars
+  74:65  error    Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  75:56  error    Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\rroun\Downloads\REAL LEVLING\apps\mobile\app\(app)\profile\[id].tsx
+  1:10  warning  'useEffect' is defined but never used          @typescript-eslint/no-unused-vars
+  2:57  warning  'ActivityIndicator' is defined but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\rroun\Downloads\REAL LEVLING\apps\mobile\app\(app)\transformation\dashboard.tsx
+  23:6  warning  React Hook useEffect has a missing dependency: 'fetchTransformationData'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+C:\Users\rroun\Downloads\REAL LEVLING\apps\mobile\app\(app)\transformation\measurements.tsx
+  109:14  error  Error: Cannot create components during render
+
+Components created during render will reset their state each time they are created. Declare components outside of render.
+
+C:\Users\rroun\Downloads\REAL LEVLING\apps\mobile\app\(app)\transformation\measurements.tsx:109:14
+  107 |           <GlassCard padding={24} style={styles.card}>
+  108 |             <Text style={styles.sectionTitle}>BODY MEASUREMENTS</Text>
+> 109 |             <MeasurementInput label="Chest" value={chest} onChange={setChest} />
+      |              ^^^^^^^^^^^^^^^^ This component is created during render
+  110 |             <MeasurementInput label="Waist" value={waist} onChange={setWaist} />
+  111 |             <MeasurementInput label="Arms" value={arms} onChange={setArms} />
+  112 |             <Text style={styles.note}>
+
+C:\Users\rroun\Downloads\REAL LEVLING\apps\mobile\app\(app)\transformation\measurements.tsx:49:28
+  47 |   };
+  48 |
+> 49 |   const MeasurementInput = ({
+     |                            ^^
+> 50 |     label,
+     | ^^^^^^^^^^
+> 51 |     value,
+     ΓÇª
+     | ^^^^^^^^^^
+> 71 |     </View>
+     | ^^^^^^^^^^
+> 72 |   );
+     | ^^^^ The component is created during render here
+  73 |
+  74 |   return (
+  75 |     <ScreenContainer>                                     react-hooks/static-components
+  110:14  error  Error: Cannot create components during render
+
+Components created during render will reset their state each time they are created. Declare components outside of render.
+
+C:\Users\rroun\Downloads\REAL LEVLING\apps\mobile\app\(app)\transformation\measurements.tsx:110:14
+  108 |             <Text style={styles.sectionTitle}>BODY MEASUREMENTS</Text>
+  109 |             <MeasurementInput label="Chest" value={chest} onChange={setChest} />
+> 110 |             <MeasurementInput label="Waist" value={waist} onChange={setWaist} />
+      |              ^^^^^^^^^^^^^^^^ This component is created during render
+  111 |             <MeasurementInput label="Arms" value={arms} onChange={setArms} />
+  112 |             <Text style={styles.note}>
+  113 |               Other fields (Neck, Shoulders, Hips, Thighs) can be added in full settings.
+
+C:\Users\rroun\Downloads\REAL LEVLING\apps\mobile\app\(app)\transformation\measurements.tsx:49:28
+  47 |   };
+  48 |
+> 49 |   const MeasurementInput = ({
+     |                            ^^
+> 50 |     label,
+     | ^^^^^^^^^^
+> 51 |     value,
+     ΓÇª
+     | ^^^^^^^^^^
+> 71 |     </View>
+     | ^^^^^^^^^^
+> 72 |   );
+     | ^^^^ The component is created during render here
+  73 |
+  74 |   return (
+  75 |     <ScreenContainer>  react-hooks/static-components
+  111:14  error  Error: Cannot create components during render
+
+Components created during render will reset their state each time they are created. Declare components outside of render.
+
+C:\Users\rroun\Downloads\REAL LEVLING\apps\mobile\app\(app)\transformation\measurements.tsx:111:14
+  109 |             <MeasurementInput label="Chest" value={chest} onChange={setChest} />
+  110 |             <MeasurementInput label="Waist" value={waist} onChange={setWaist} />
+> 111 |             <MeasurementInput label="Arms" value={arms} onChange={setArms} />
+      |              ^^^^^^^^^^^^^^^^ This component is created during render
+  112 |             <Text style={styles.note}>
+  113 |               Other fields (Neck, Shoulders, Hips, Thighs) can be added in full settings.
+  114 |             </Text>
+
+C:\Users\rroun\Downloads\REAL LEVLING\apps\mobile\app\(app)\transformation\measurements.tsx:49:28
+  47 |   };
+  48 |
+> 49 |   const MeasurementInput = ({
+     |                            ^^
+> 50 |     label,
+     | ^^^^^^^^^^
+> 51 |     value,
+     ΓÇª
+     | ^^^^^^^^^^
+> 71 |     </View>
+     | ^^^^^^^^^^
+> 72 |   );
+     | ^^^^ The component is created during render here
+  73 |
+  74 |   return (
+  75 |     <ScreenContainer>                                                     react-hooks/static-components
+
+C:\Users\rroun\Downloads\REAL LEVLING\apps\mobile\app\(app)\transformation\photos.tsx
+  38:16  error  Error: Cannot create components during render
+
+Components created during render will reset their state each time they are created. Declare components outside of render.
+
+C:\Users\rroun\Downloads\REAL LEVLING\apps\mobile\app\(app)\transformation\photos.tsx:38:16
+  36 |           <GlassCard padding={24} style={styles.card}>
+  37 |             <View style={styles.row}>
+> 38 |               <PhotoPlaceholder label="FRONT" />
+     |                ^^^^^^^^^^^^^^^^ This component is created during render
+  39 |               <PhotoPlaceholder label="SIDE" />
+  40 |             </View>
+  41 |             <View style={[styles.row, { marginTop: 16 }]}>
+
+C:\Users\rroun\Downloads\REAL LEVLING\apps\mobile\app\(app)\transformation\photos.tsx:13:28
+  11 |   const router = useRouter();
+  12 |
+> 13 |   const PhotoPlaceholder = ({ label }: { label: string }) => (
+     |                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 14 |     <View style={styles.photoBox}>
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 15 |       <Text style={styles.photoIcon}>≡ƒô╖</Text>
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 16 |       <Text style={styles.photoLabel}>{label}</Text>
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 17 |     </View>
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 18 |   );
+     | ^^^^ The component is created during render here
+  19 |
+  20 |   return (
+  21 |     <ScreenContainer>    react-hooks/static-components
+  39:16  error  Error: Cannot create components during render
+
+Components created during render will reset their state each time they are created. Declare components outside of render.
+
+C:\Users\rroun\Downloads\REAL LEVLING\apps\mobile\app\(app)\transformation\photos.tsx:39:16
+  37 |             <View style={styles.row}>
+  38 |               <PhotoPlaceholder label="FRONT" />
+> 39 |               <PhotoPlaceholder label="SIDE" />
+     |                ^^^^^^^^^^^^^^^^ This component is created during render
+  40 |             </View>
+  41 |             <View style={[styles.row, { marginTop: 16 }]}>
+  42 |               <PhotoPlaceholder label="BACK" />
+
+C:\Users\rroun\Downloads\REAL LEVLING\apps\mobile\app\(app)\transformation\photos.tsx:13:28
+  11 |   const router = useRouter();
+  12 |
+> 13 |   const PhotoPlaceholder = ({ label }: { label: string }) => (
+     |                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 14 |     <View style={styles.photoBox}>
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 15 |       <Text style={styles.photoIcon}>≡ƒô╖</Text>
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 16 |       <Text style={styles.photoLabel}>{label}</Text>
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 17 |     </View>
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 18 |   );
+     | ^^^^ The component is created during render here
+  19 |
+  20 |   return (
+  21 |     <ScreenContainer>           react-hooks/static-components
+  42:16  error  Error: Cannot create components during render
+
+Components created during render will reset their state each time they are created. Declare components outside of render.
+
+C:\Users\rroun\Downloads\REAL LEVLING\apps\mobile\app\(app)\transformation\photos.tsx:42:16
+  40 |             </View>
+  41 |             <View style={[styles.row, { marginTop: 16 }]}>
+> 42 |               <PhotoPlaceholder label="BACK" />
+     |                ^^^^^^^^^^^^^^^^ This component is created during render
+  43 |               <View style={[styles.photoBox, { backgroundColor: 'transparent', borderWidth: 0 }]} />
+  44 |             </View>
+  45 |           </GlassCard>
+
+C:\Users\rroun\Downloads\REAL LEVLING\apps\mobile\app\(app)\transformation\photos.tsx:13:28
+  11 |   const router = useRouter();
+  12 |
+> 13 |   const PhotoPlaceholder = ({ label }: { label: string }) => (
+     |                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 14 |     <View style={styles.photoBox}>
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 15 |       <Text style={styles.photoIcon}>≡ƒô╖</Text>
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 16 |       <Text style={styles.photoLabel}>{label}</Text>
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 17 |     </View>
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 18 |   );
+     | ^^^^ The component is created during render here
+  19 |
+  20 |   return (
+  21 |     <ScreenContainer>  react-hooks/static-components
+
+C:\Users\rroun\Downloads\REAL LEVLING\apps\mobile\app\(app)\transformation\review.tsx
+  14:11  warning  'profile' is assigned a value but never used    @typescript-eslint/no-unused-vars
+  14:20  warning  'lifeStats' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\rroun\Downloads\REAL LEVLING\apps\mobile\app\(app)\trophy-room.tsx
+  9:39  warning  'radius' is defined but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\rroun\Downloads\REAL LEVLING\apps\mobile\app\(app)\workout\session.tsx
+   7:3   warning  'useAnimatedStyle' is defined but never used                                                                                                                                           @typescript-eslint/no-unused-vars
+   8:3   warning  'withTiming' is defined but never used                                                                                                                                                 @typescript-eslint/no-unused-vars
+   9:3   warning  'Easing' is defined but never used                                                                                                                                                     @typescript-eslint/no-unused-vars
+  10:3   warning  'useSharedValue' is defined but never used                                                                                                                                             @typescript-eslint/no-unused-vars
+  21:9   warning  'width' is assigned a value but never used                                                                                                                                             @typescript-eslint/no-unused-vars
+  37:5   warning  'endSession' is assigned a value but never used                                                                                                                                        @typescript-eslint/no-unused-vars
+  68:11  warning  Unexpected console statement. Only these console methods are allowed: warn, error                                                                                                      no-console
+  75:6   warning  React Hook useEffect has missing dependencies: 'resetSession', 'router', 'todaysObjective?.day_type', 'user.id', and 'workoutLog'. Either include them or remove the dependency array  react-hooks/exhaustive-deps
+
+C:\Users\rroun\Downloads\REAL LEVLING\apps\mobile\app\(onboarding)\avatar.tsx
+    2:45  warning  'Image' is defined but never used                                                                                             @typescript-eslint/no-unused-vars
+  117:6   warning  React Hook useEffect has missing dependencies: 'glowOpacity' and 'scale'. Either include them or remove the dependency array  react-hooks/exhaustive-deps
+
+C:\Users\rroun\Downloads\REAL LEVLING\apps\mobile\app\(onboarding)\experience.tsx
+  66:67  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\rroun\Downloads\REAL LEVLING\apps\mobile\app\(onboarding)\goals.tsx
+  53:19  warning  'isSelected' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  67:60  error    Unexpected any. Specify a different type         @typescript-eslint/no-explicit-any
+
+C:\Users\rroun\Downloads\REAL LEVLING\apps\mobile\app\(onboarding)\logistics.tsx
+   63:21  warning  'isSelected' is assigned a value but never used  @typescript-eslint/no-unused-vars
+   79:66  error    Unexpected any. Specify a different type         @typescript-eslint/no-explicit-any
+  100:69  error    Unexpected any. Specify a different type         @typescript-eslint/no-explicit-any
+
+C:\Users\rroun\Downloads\REAL LEVLING\apps\mobile\app\(onboarding)\permissions.tsx
+  18:3   warning  'FadeIn' is defined but never used        @typescript-eslint/no-unused-vars
+  66:12  error    Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\rroun\Downloads\REAL LEVLING\apps\mobile\app\_layout.tsx
+   54:3   warning  Unexpected console statement. Only these console methods are allowed: warn, error  no-console
+   79:7   warning  Unexpected console statement. Only these console methods are allowed: warn, error  no-console
+   82:11  warning  Unexpected console statement. Only these console methods are allowed: warn, error  no-console
+   84:19  warning  'data' is assigned a value but never used                                          @typescript-eslint/no-unused-vars
+  104:9   warning  Unexpected console statement. Only these console methods are allowed: warn, error  no-console
+  108:9   warning  Unexpected console statement. Only these console methods are allowed: warn, error  no-console
+  114:11  warning  Unexpected console statement. Only these console methods are allowed: warn, error  no-console
+
+C:\Users\rroun\Downloads\REAL LEVLING\apps\mobile\app\index.tsx
+  6:3  warning  Unexpected console statement. Only these console methods are allowed: warn, error  no-console
+
+C:\Users\rroun\Downloads\REAL LEVLING\apps\mobile\src\components\avatar\AvatarDisplay.tsx
+  24:44  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  @typescript-eslint/no-explicit-any
+  36:7   error    Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+C:\Users\rroun\Downloads\REAL LEVLING\apps\mobile\src\components\avatar\AvatarDisplay.tsx:36:7
+  34 |     const nextImage = getAvatarImage();
+  35 |     if (nextImage !== currentImage) {
+> 36 |       setOldImage(currentImage);
+     |       ^^^^^^^^^^^ Avoid calling setState() directly within an effect
+  37 |       setCurrentImage(nextImage);
+  38 |       setIsTransitioning(true);
+  39 |  react-hooks/set-state-in-effect
+  62:6   warning  React Hook useEffect has missing dependencies: 'currentImage', 'getAvatarImage', and 'transitionProgress'. Either include them or remove the dependency array. You can also replace multiple useState variables with useReducer if 'setOldImage' needs the current value of 'currentImage'                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                react-hooks/exhaustive-deps
+  82:6   warning  React Hook useEffect has missing dependencies: 'glowOpacity' and 'glowScale'. Either include them or remove the dependency array                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          react-hooks/exhaustive-deps
+
+C:\Users\rroun\Downloads\REAL LEVLING\apps\mobile\src\components\avatar\EvolutionGallery.tsx
+   17:3  warning  'interpolateColor' is defined but never used                                                                                                   @typescript-eslint/no-unused-vars
+  105:6  warning  React Hook useEffect has missing dependencies: 'flashOpacity', 'glowOpacity', and 'scale'. Either include them or remove the dependency array  react-hooks/exhaustive-deps
+
+C:\Users\rroun\Downloads\REAL LEVLING\apps\mobile\src\components\avatar\ParticleBurst.tsx
+  12:3  warning  'runOnJS' is defined but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\rroun\Downloads\REAL LEVLING\apps\mobile\src\components\common\AvatarPreview.tsx
+  12:11  warning  'gender' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\rroun\Downloads\REAL LEVLING\apps\mobile\src\components\common\DevMenu.tsx
+  28:64  warning  Unexpected console statement. Only these console methods are allowed: warn, error  no-console
+  31:64  warning  Unexpected console statement. Only these console methods are allowed: warn, error  no-console
+  34:64  warning  Unexpected console statement. Only these console methods are allowed: warn, error  no-console
+  37:64  warning  Unexpected console statement. Only these console methods are allowed: warn, error  no-console
+  40:64  warning  Unexpected console statement. Only these console methods are allowed: warn, error  no-console
+  43:64  warning  Unexpected console statement. Only these console methods are allowed: warn, error  no-console
+
+C:\Users\rroun\Downloads\REAL LEVLING\apps\mobile\src\components\common\RarityBadge.tsx
+   2:10  warning  'View' is defined but never used                                                                                @typescript-eslint/no-unused-vars
+  12:3   warning  'withSpring' is defined but never used                                                                          @typescript-eslint/no-unused-vars
+  68:6   warning  React Hook React.useEffect has a missing dependency: 'pulse'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+C:\Users\rroun\Downloads\REAL LEVLING\apps\mobile\src\components\inventory\InventoryCard.tsx
+   9:3   warning  'interpolateColor' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               @typescript-eslint/no-unused-vars
+  32:6   warning  React Hook React.useEffect has a missing dependency: 'particleAnim'. Either include it or remove the dependency array                                                                                                                                                                                                                                                                                                                                                                                                                                                      react-hooks/exhaustive-deps
+  63:25  error    Error: This value cannot be modified
+
+This modifies a variable that React considers immutable.
+
+C:\Users\rroun\Downloads\REAL LEVLING\apps\mobile\src\components\inventory\InventoryCard.tsx:63:25
+  61 |       style={styles.wrapper}
+  62 |       onPress={() => onPress(item)}
+> 63 |       onPressIn={() => (isPressed.value = 1)}
+     |                         ^^^^^^^^^ `isPressed` cannot be modified
+  64 |       onPressOut={() => (isPressed.value = 0)}
+  65 |     >
+  66 |       <Animated.View style={[styles.container, animatedStyle]}>                   react-hooks/immutability
+  64:26  error    Error: This value cannot be modified
+
+This modifies a variable that React considers immutable.
+
+C:\Users\rroun\Downloads\REAL LEVLING\apps\mobile\src\components\inventory\InventoryCard.tsx:64:26
+  62 |       onPress={() => onPress(item)}
+  63 |       onPressIn={() => (isPressed.value = 1)}
+> 64 |       onPressOut={() => (isPressed.value = 0)}
+     |                          ^^^^^^^^^ `isPressed` cannot be modified
+  65 |     >
+  66 |       <Animated.View style={[styles.container, animatedStyle]}>
+  67 |         <View style={styles.imageContainer}>  react-hooks/immutability
+
+C:\Users\rroun\Downloads\REAL LEVLING\apps\mobile\src\components\missions\MissionCard.tsx
+   8:3   warning  'withSpring' is defined but never used                                                                               @typescript-eslint/no-unused-vars
+  12:3   warning  'withSequence' is defined but never used                                                                             @typescript-eslint/no-unused-vars
+  35:6   warning  React Hook React.useEffect has a missing dependency: 'pulseValue'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+  58:9   warning  'getRarityColor' is assigned a value but never used                                                                  @typescript-eslint/no-unused-vars
+  78:9   warning  'profile' is assigned a value but never used                                                                         @typescript-eslint/no-unused-vars
+  82:84  error    Unexpected any. Specify a different type                                                                             @typescript-eslint/no-explicit-any
+
+C:\Users\rroun\Downloads\REAL LEVLING\apps\mobile\src\components\navigation\FloatingTabBar.tsx
+  18:30  warning  'radius' is defined but never used        @typescript-eslint/no-unused-vars
+  18:38  warning  'spacing' is defined but never used       @typescript-eslint/no-unused-vars
+  93:55  error    Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  97:35  error    Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\rroun\Downloads\REAL LEVLING\apps\mobile\src\components\shop\ShopItemCard.tsx
+   9:3   warning  'withRepeat' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             @typescript-eslint/no-unused-vars
+  10:3   warning  'withSequence' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           @typescript-eslint/no-unused-vars
+  54:27  error    Error: This value cannot be modified
+
+This modifies a variable that React considers immutable.
+
+C:\Users\rroun\Downloads\REAL LEVLING\apps\mobile\src\components\shop\ShopItemCard.tsx:54:27
+  52 |       <Pressable
+  53 |         onPress={() => onPress(item)}
+> 54 |         onPressIn={() => (isPressed.value = 1)}
+     |                           ^^^^^^^^^ `isPressed` cannot be modified
+  55 |         onPressOut={() => (isPressed.value = 0)}
+  56 |       >
+  57 |         <Animated.View style={[styles.container, animatedStyle]}>                                 react-hooks/immutability
+  55:28  error    Error: This value cannot be modified
+
+This modifies a variable that React considers immutable.
+
+C:\Users\rroun\Downloads\REAL LEVLING\apps\mobile\src\components\shop\ShopItemCard.tsx:55:28
+  53 |         onPress={() => onPress(item)}
+  54 |         onPressIn={() => (isPressed.value = 1)}
+> 55 |         onPressOut={() => (isPressed.value = 0)}
+     |                            ^^^^^^^^^ `isPressed` cannot be modified
+  56 |       >
+  57 |         <Animated.View style={[styles.container, animatedStyle]}>
+  58 |           <View style={styles.imageContainer}>  react-hooks/immutability
+
+C:\Users\rroun\Downloads\REAL LEVLING\apps\mobile\src\components\system\DailyBriefing.tsx
+  2:47  warning  'StyleSheet' is defined but never used  @typescript-eslint/no-unused-vars
+  2:71  warning  'Image' is defined but never used       @typescript-eslint/no-unused-vars
+
+C:\Users\rroun\Downloads\REAL LEVLING\apps\mobile\src\components\system\DailyChest.tsx
+  2:40  warning  'Image' is defined but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\rroun\Downloads\REAL LEVLING\apps\mobile\src\components\system\FirstUseGuide.tsx
+  2:47  warning  'StyleSheet' is defined but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\rroun\Downloads\REAL LEVLING\apps\mobile\src\components\system\RankRival.tsx
+  2:22  warning  'Image' is defined but never used         @typescript-eslint/no-unused-vars
+  9:38  error    Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\rroun\Downloads\REAL LEVLING\apps\mobile\src\components\system\SystemMomentOverlay.tsx
+   1:17  warning  'useEffect' is defined but never used     @typescript-eslint/no-unused-vars
+   2:47  warning  'StyleSheet' is defined but never used    @typescript-eslint/no-unused-vars
+  22:56  error    Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\rroun\Downloads\REAL LEVLING\apps\mobile\src\components\ui\AchievementCard.tsx
+  9:30  warning  'radius' is defined but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\rroun\Downloads\REAL LEVLING\apps\mobile\src\components\ui\EvolutionCard.tsx
+  37:9  warning  'stageProgress' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\rroun\Downloads\REAL LEVLING\apps\mobile\src\components\ui\GlobalPopupQueue.tsx
+  12:3  warning  'Easing' is defined but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\rroun\Downloads\REAL LEVLING\apps\mobile\src\components\ui\OnboardingIcons.tsx
+  16:10  error    Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  16:23  error    Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  16:34  error    Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  16:45  error    Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  16:56  error    Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  18:21  warning  A `require()` style import is forbidden   @typescript-eslint/no-require-imports
+
+C:\Users\rroun\Downloads\REAL LEVLING\apps\mobile\src\components\ui\StatCard.tsx
+  7:28  warning  'View' is defined but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\rroun\Downloads\REAL LEVLING\apps\mobile\src\db\repositories\supabase\BossRepository.ts
+   13:48  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   24:48  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   35:48  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   46:48  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   59:48  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   79:48  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  108:52  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  130:48  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\rroun\Downloads\REAL LEVLING\apps\mobile\src\db\repositories\supabase\FeedRepository.ts
+    5:3   warning  'PostReactionRow' is defined but never used  @typescript-eslint/no-unused-vars
+   13:48  error    Unexpected any. Specify a different type     @typescript-eslint/no-explicit-any
+   24:48  error    Unexpected any. Specify a different type     @typescript-eslint/no-explicit-any
+   42:48  error    Unexpected any. Specify a different type     @typescript-eslint/no-explicit-any
+   53:42  error    Unexpected any. Specify a different type     @typescript-eslint/no-explicit-any
+   64:42  error    Unexpected any. Specify a different type     @typescript-eslint/no-explicit-any
+   77:42  error    Unexpected any. Specify a different type     @typescript-eslint/no-explicit-any
+   89:48  error    Unexpected any. Specify a different type     @typescript-eslint/no-explicit-any
+  105:48  error    Unexpected any. Specify a different type     @typescript-eslint/no-explicit-any
+
+C:\Users\rroun\Downloads\REAL LEVLING\apps\mobile\src\db\repositories\supabase\InventoryRepository.ts
+  56:44  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\rroun\Downloads\REAL LEVLING\apps\mobile\src\db\repositories\supabase\ShopRepository.ts
+  43:63  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\rroun\Downloads\REAL LEVLING\apps\mobile\src\db\repositories\supabase\SocialRepository.ts
+   7:48  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  17:48  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  27:42  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  36:42  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  47:48  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  58:48  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  69:42  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  78:42  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  88:42  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  95:48  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\rroun\Downloads\REAL LEVLING\apps\mobile\src\db\repositories\supabase\StorageRepository.ts
+   3:13  warning  'FileSystem' is defined but never used    @typescript-eslint/no-unused-vars
+   5:24  error    Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  30:17  error    Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  44:17  error    Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\rroun\Downloads\REAL LEVLING\apps\mobile\src\db\repositories\supabase\SystemRepository.ts
+    7:3   warning  'RivalRow' is defined but never used                    @typescript-eslint/no-unused-vars
+    8:3   warning  'NotificationPreferencesRow' is defined but never used  @typescript-eslint/no-unused-vars
+   14:48  error    Unexpected any. Specify a different type                @typescript-eslint/no-explicit-any
+   25:48  error    Unexpected any. Specify a different type                @typescript-eslint/no-explicit-any
+   41:48  error    Unexpected any. Specify a different type                @typescript-eslint/no-explicit-any
+   54:48  error    Unexpected any. Specify a different type                @typescript-eslint/no-explicit-any
+   67:42  error    Unexpected any. Specify a different type                @typescript-eslint/no-explicit-any
+   80:14  error    Unexpected any. Specify a different type                @typescript-eslint/no-explicit-any
+   83:48  error    Unexpected any. Specify a different type                @typescript-eslint/no-explicit-any
+   99:48  error    Unexpected any. Specify a different type                @typescript-eslint/no-explicit-any
+  112:15  error    Unexpected any. Specify a different type                @typescript-eslint/no-explicit-any
+  114:48  error    Unexpected any. Specify a different type                @typescript-eslint/no-explicit-any
+
+C:\Users\rroun\Downloads\REAL LEVLING\apps\mobile\src\features\achievements\services\StreakService.ts
+  5:10  warning  'UserStatsRow' is defined but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\rroun\Downloads\REAL LEVLING\apps\mobile\src\features\avatar\services\AvatarEvolutionService.ts
+  71:18  warning  'item' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\rroun\Downloads\REAL LEVLING\apps\mobile\src\features\inventory\repositories\EquipmentRepository.ts
+  18:45  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\rroun\Downloads\REAL LEVLING\apps\mobile\src\features\inventory\repositories\InventoryRepository.ts
+  17:77  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  25:24  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  49:35  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  57:46  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\rroun\Downloads\REAL LEVLING\apps\mobile\src\features\inventory\services\InventoryService.ts
+  10:35  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  19:35  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\rroun\Downloads\REAL LEVLING\apps\mobile\src\features\journey\services\JourneyGenerationService.ts
+   1:10  warning  'repositories' is defined but never used               @typescript-eslint/no-unused-vars
+   6:10  warning  'AdaptiveDifficultyService' is defined but never used  @typescript-eslint/no-unused-vars
+   9:6   warning  'ProfileRow' is defined but never used                 @typescript-eslint/no-unused-vars
+  18:14  error    Unexpected any. Specify a different type               @typescript-eslint/no-explicit-any
+  53:13  warning  'chapterName' is assigned a value but never used       @typescript-eslint/no-unused-vars
+  74:44  error    Unexpected any. Specify a different type               @typescript-eslint/no-explicit-any
+  74:58  error    Unexpected any. Specify a different type               @typescript-eslint/no-explicit-any
+  77:11  warning  'timeAvailable' is assigned a value but never used     @typescript-eslint/no-unused-vars
+
+C:\Users\rroun\Downloads\REAL LEVLING\apps\mobile\src\features\journey\services\JourneyProgressService.ts
+  2:10  warning  'UserJourneyDayRow' is defined but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\rroun\Downloads\REAL LEVLING\apps\mobile\src\features\journey\services\JourneyRewardService.ts
+   1:10  warning  'repositories' is defined but never used                                           @typescript-eslint/no-unused-vars
+  21:5   warning  Unexpected console statement. Only these console methods are allowed: warn, error  no-console
+  41:5   warning  Unexpected console statement. Only these console methods are allowed: warn, error  no-console
+
+C:\Users\rroun\Downloads\REAL LEVLING\apps\mobile\src\features\journey\services\JourneyService.ts
+   4:10  warning  'JourneyRewardService' is defined but never used  @typescript-eslint/no-unused-vars
+  45:54  error    Unexpected any. Specify a different type          @typescript-eslint/no-explicit-any
+  70:89  error    Unexpected any. Specify a different type          @typescript-eslint/no-explicit-any
+  74:44  error    Unexpected any. Specify a different type          @typescript-eslint/no-explicit-any
+
+C:\Users\rroun\Downloads\REAL LEVLING\apps\mobile\src\features\quests\engines\MissionGenerator.ts
+  151:90  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  226:50  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\rroun\Downloads\REAL LEVLING\apps\mobile\src\features\quests\services\MissionService.ts
+   9:10  warning  'MissionRow' is defined but never used    @typescript-eslint/no-unused-vars
+  39:23  error    Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\rroun\Downloads\REAL LEVLING\apps\mobile\src\features\rewards\services\RewardOrchestrator.ts
+   87:7   warning  'totalCoinsGained' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  112:7   warning  'totalXpGained' is assigned a value but never used     @typescript-eslint/no-unused-vars
+  113:7   warning  'totalGemsGained' is assigned a value but never used   @typescript-eslint/no-unused-vars
+  161:20  error    Unexpected any. Specify a different type               @typescript-eslint/no-explicit-any
+  195:23  error    Unexpected any. Specify a different type               @typescript-eslint/no-explicit-any
+
+C:\Users\rroun\Downloads\REAL LEVLING\apps\mobile\src\features\shop\services\ShopService.ts
+   8:40  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   9:37  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  11:55  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\rroun\Downloads\REAL LEVLING\apps\mobile\src\features\transformation\services\TransformationService.ts
+   3:3   warning  'TransformationProfileRow' is defined but never used  @typescript-eslint/no-unused-vars
+   4:3   warning  'BodyMeasurementRow' is defined but never used        @typescript-eslint/no-unused-vars
+   5:3   warning  'StrengthRecordRow' is defined but never used         @typescript-eslint/no-unused-vars
+   6:3   warning  'LifeHistoryStatsRow' is defined but never used       @typescript-eslint/no-unused-vars
+  70:58  error    Unexpected any. Specify a different type              @typescript-eslint/no-explicit-any
+  74:42  error    Unexpected any. Specify a different type              @typescript-eslint/no-explicit-any
+  78:64  error    Unexpected any. Specify a different type              @typescript-eslint/no-explicit-any
+
+C:\Users\rroun\Downloads\REAL LEVLING\apps\mobile\src\screens\EquipmentScreen.tsx
+   1:17  warning  'useEffect' is defined but never used     @typescript-eslint/no-unused-vars
+   1:28  warning  'useState' is defined but never used      @typescript-eslint/no-unused-vars
+  27:49  error    Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\rroun\Downloads\REAL LEVLING\apps\mobile\src\screens\InventoryScreen.tsx
+  11:10  warning  'CosmeticCategory' is defined but never used                                                                       @typescript-eslint/no-unused-vars
+  41:6   warning  React Hook useEffect has a missing dependency: 'fetchInventory'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+C:\Users\rroun\Downloads\REAL LEVLING\apps\mobile\src\screens\ShopScreen.tsx
+   2:40  warning  'Text' is defined but never used                                                                                   @typescript-eslint/no-unused-vars
+  28:6   warning  React Hook useEffect has a missing dependency: 'fetchShopItems'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+C:\Users\rroun\Downloads\REAL LEVLING\apps\mobile\src\services\AnalyticsService.ts
+  27:68  error    Unexpected any. Specify a different type                                           @typescript-eslint/no-explicit-any
+  29:7   warning  Unexpected console statement. Only these console methods are allowed: warn, error  no-console
+
+C:\Users\rroun\Downloads\REAL LEVLING\apps\mobile\src\services\BossBattleService.ts
+  4:10  warning  'BossRow' is defined but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\rroun\Downloads\REAL LEVLING\apps\mobile\src\services\DailyChestService.ts
+  32:47  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\rroun\Downloads\REAL LEVLING\apps\mobile\src\services\PersonalRecordService.ts
+  10:15  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  14:37  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  29:27  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\rroun\Downloads\REAL LEVLING\apps\mobile\src\services\ProgressionTeaserService.ts
+   1:10  warning  'AvatarEvolutionService' is defined but never used  @typescript-eslint/no-unused-vars
+  16:13  warning  'xpNeeded' is assigned a value but never used       @typescript-eslint/no-unused-vars
+
+C:\Users\rroun\Downloads\REAL LEVLING\apps\mobile\src\services\RivalService.ts
+  1:10  warning  'repositories' is defined but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\rroun\Downloads\REAL LEVLING\apps\mobile\src\services\SystemInsightService.ts
+  24:36  error    Unexpected any. Specify a different type               @typescript-eslint/no-explicit-any
+  28:7   warning  'progressionState' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  30:7   warning  'socialState' is assigned a value but never used       @typescript-eslint/no-unused-vars
+
+C:\Users\rroun\Downloads\REAL LEVLING\apps\mobile\src\services\SystemMomentService.ts
+  13:14  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\rroun\Downloads\REAL LEVLING\apps\mobile\src\store\avatar.store.ts
+  40:25  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  72:16  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\rroun\Downloads\REAL LEVLING\apps\mobile\src\store\boss.store.ts
+  222:26  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  227:26  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  274:26  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\rroun\Downloads\REAL LEVLING\apps\mobile\src\store\inventory.store.ts
+  25:40  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\rroun\Downloads\REAL LEVLING\apps\mobile\src\store\journey.store.ts
+  15:20  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  18:27  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  39:47  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  59:33  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\rroun\Downloads\REAL LEVLING\apps\mobile\src\store\progression.store.ts
+  109:17  warning  'currentLevel' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  109:31  warning  'currentRank' is assigned a value but never used   @typescript-eslint/no-unused-vars
+
+C:\Users\rroun\Downloads\REAL LEVLING\apps\mobile\src\store\shop.store.ts
+   3:25  warning  'CosmeticCategory' is defined but never used  @typescript-eslint/no-unused-vars
+   5:10  warning  'useAuthStore' is defined but never used      @typescript-eslint/no-unused-vars
+  30:40  error    Unexpected any. Specify a different type      @typescript-eslint/no-explicit-any
+  33:57  error    Unexpected any. Specify a different type      @typescript-eslint/no-explicit-any
+
+C:\Users\rroun\Downloads\REAL LEVLING\apps\mobile\src\store\system.store.ts
+   6:3   warning  'DailyChestStatus' is defined but never used  @typescript-eslint/no-unused-vars
+   7:3   warning  'ComebackTier' is defined but never used      @typescript-eslint/no-unused-vars
+  34:14  error    Unexpected any. Specify a different type      @typescript-eslint/no-explicit-any
+  38:30  error    Unexpected any. Specify a different type      @typescript-eslint/no-explicit-any
+node.exe : (node:3692) ESLintRCWarning: You are using an eslintrc configuration file, which is deprecated and support 
+will be removed in v10.0.0. Please migrate to an eslint.config.js file. See 
+https://eslint.org/docs/latest/use/configure/migration-guide for details. An eslintrc configuration file is used 
+because you have the ESLINT_USE_FLAT_CONFIG environment variable set to false. If you want to use an eslint.config.js 
+file, remove the environment variable. If you want to find the location of the eslintrc configuration file, use the 
+--debug flag.
+At line:1 char:1
++ & "C:\Program Files\nodejs/node.exe" "C:\Program Files\nodejs/node_mo ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: ((node:3692) ESL...e --debug flag.:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+C:\Users\rroun\Downloads\REAL LEVLING\apps\mobile\src\types\inventory.types.ts
+  40:15  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\rroun\Downloads\REAL LEVLING\apps\mobile\src\types\system.types.ts
+  32:12  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  42:13  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+Γ£û 271 problems (132 errors, 139 warnings)
+

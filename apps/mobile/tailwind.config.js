@@ -176,10 +176,8 @@ module.exports = {
         // Neon glows — Active tier
         'glow-purple-active':
           '0 0 20px rgba(139, 60, 247, 0.55), 0 0 40px rgba(139, 60, 247, 0.25)',
-        'glow-blue-active':
-          '0 0 20px rgba(59, 91, 246, 0.55), 0 0 40px rgba(59, 91, 246, 0.25)',
-        'glow-gold-active':
-          '0 0 20px rgba(252, 211, 77, 0.50), 0 0 40px rgba(252, 211, 77, 0.20)',
+        'glow-blue-active': '0 0 20px rgba(59, 91, 246, 0.55), 0 0 40px rgba(59, 91, 246, 0.25)',
+        'glow-gold-active': '0 0 20px rgba(252, 211, 77, 0.50), 0 0 40px rgba(252, 211, 77, 0.20)',
 
         // Neon glows — Surge tier (ceremonies only)
         'glow-purple-surge':

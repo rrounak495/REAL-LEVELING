@@ -1,7 +1,15 @@
 /**
  * app/(auth)/register.tsx — Registration Screen
  */
-import { StyleSheet, Text, View, ScrollView, KeyboardAvoidingView, Platform } from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  ScrollView,
+  KeyboardAvoidingView,
+  Platform,
+  Alert,
+} from 'react-native';
 import Animated, { FadeInDown } from 'react-native-reanimated';
 import { router } from 'expo-router';
 import { ScreenContainer } from '@/components/ui/ScreenContainer';
@@ -136,7 +144,10 @@ export default function RegisterScreen() {
           <OAuthButton
             provider="google"
             onPress={() => {
-              /* Sprint 3B+ */
+              Alert.alert(
+                'Coming Soon',
+                'Google Sign-In will be available in a future update. Please create an account with email for now.',
+              );
             }}
           />
 

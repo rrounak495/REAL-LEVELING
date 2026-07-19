@@ -2,9 +2,7 @@
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
     "target": "ESNext",
-    "lib": [
-      "ESNext"
-    ],
+    "lib": ["ESNext"],
     "jsx": "react-jsx",
     "module": "ESNext",
     "moduleResolution": "bundler",
@@ -21,56 +19,21 @@
     "ignoreDeprecations": "6.0",
     "baseUrl": ".",
     "paths": {
-      "@/*": [
-        "./src/*"
-      ],
-      "@theme": [
-        "./src/theme/index"
-      ],
-      "@theme/*": [
-        "./src/theme/*"
-      ],
-      "@store": [
-        "./src/store/index"
-      ],
-      "@store/*": [
-        "./src/store/*"
-      ],
-      "@lib/*": [
-        "./src/lib/*"
-      ],
-      "@features/*": [
-        "./src/features/*"
-      ],
-      "@components/*": [
-        "./src/components/*"
-      ],
-      "@hooks/*": [
-        "./src/hooks/*"
-      ],
-      "@utils/*": [
-        "./src/utils/*"
-      ],
-      "@constants/*": [
-        "./src/constants/*"
-      ],
-      "@types/*": [
-        "./src/types/*"
-      ],
-      "@db/*": [
-        "./src/db/*"
-      ]
+      "@/*": ["./src/*"],
+      "@theme": ["./src/theme/index"],
+      "@theme/*": ["./src/theme/*"],
+      "@store": ["./src/store/index"],
+      "@store/*": ["./src/store/*"],
+      "@lib/*": ["./src/lib/*"],
+      "@features/*": ["./src/features/*"],
+      "@components/*": ["./src/components/*"],
+      "@hooks/*": ["./src/hooks/*"],
+      "@utils/*": ["./src/utils/*"],
+      "@constants/*": ["./src/constants/*"],
+      "@types/*": ["./src/types/*"],
+      "@db/*": ["./src/db/*"]
     }
   },
-  "include": [
-    "**/*.ts",
-    "**/*.tsx",
-    ".expo/types/**/*.d.ts",
-    "nativewind-env.d.ts"
-  ],
-  "exclude": [
-    "node_modules",
-    "dist",
-    "babel.config.js"
-  ]
+  "include": ["**/*.ts", "**/*.tsx", ".expo/types/**/*.d.ts", "nativewind-env.d.ts"],
+  "exclude": ["node_modules", "dist", "babel.config.js"]
 }

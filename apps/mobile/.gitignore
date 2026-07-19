@@ -39,3 +39,9 @@ yarn-error.*
 # generated native folders
 /ios
 /android
+apps - Copy/
+.github - Copy/
+.husky - Copy/
+node_modules/
+.expo/
+*.log

@@ -21,11 +21,11 @@ class MockMMKV {
   getString(key: string): string | undefined {
     return this.storage.get(key);
   }
-  
+
   set(key: string, value: string): void {
     this.storage.set(key, value);
   }
-  
+
   delete(key: string): void {
     this.storage.delete(key);
   }

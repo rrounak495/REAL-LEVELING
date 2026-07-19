@@ -1,0 +1,12 @@
+node_modules
+*node_modules*
+.git
+.expo
+dist
+android/build
+ios/build
+android/.gradle
+*.apk
+*.aab
+*.log
+supabase/.temp

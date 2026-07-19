@@ -1,7 +1,15 @@
 /**
  * app/(auth)/login.tsx — Login Screen
  */
-import { StyleSheet, Text, View, ScrollView, KeyboardAvoidingView, Platform } from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  ScrollView,
+  KeyboardAvoidingView,
+  Platform,
+  Alert,
+} from 'react-native';
 import Animated, { FadeInDown } from 'react-native-reanimated';
 import { router } from 'expo-router';
 import { ScreenContainer } from '@/components/ui/ScreenContainer';
@@ -111,7 +119,10 @@ export default function LoginScreen() {
             <OAuthButton
               provider="google"
               onPress={() => {
-                /* Sprint 3B+ */
+                Alert.alert(
+                  'Coming Soon',
+                  'Google Sign-In will be available in a future update. Please sign in with email for now.',
+                );
               }}
             />
           </View>

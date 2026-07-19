@@ -11,7 +11,7 @@
  * 4. Redirects to the main app
  */
 import { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, Alert } from 'react-native';
+import { StyleSheet, Text, View, Alert, ScrollView } from 'react-native';
 import { router } from 'expo-router';
 import * as Notifications from 'expo-notifications';
 import Animated, {
@@ -27,15 +27,14 @@ import { Button } from '@/components/ui/Button';
 import { GlassCard } from '@/components/ui/GlassCard';
 import { ProgressStepper } from '@/components/ui/ProgressStepper';
 import { useOnboardingStore } from '@store';
-import { useAvatarBuilderStore } from '@/features/avatar/store';
 import { repositories } from '@/db/repositories';
 import { supabase } from '@lib/supabase';
 import { getCurrentUserId } from '@lib/supabase';
 import { colors, fontFamily } from '@theme';
+import { BellPremiumIcon } from '@/components/ui/OnboardingIcons';
 
 export default function PermissionsScreen() {
   const onboarding = useOnboardingStore();
-  const avatarDraft = useAvatarBuilderStore((s) => s.draft);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [permissionGranted, setPermissionGranted] = useState<boolean | null>(null);
 
@@ -56,32 +55,42 @@ export default function PermissionsScreen() {
         return;
       }
 
-      // 1. Create profile
       const profileResult = await repositories.profiles.upsertProfile(userId, {
         id: userId,
         username: onboarding.username.trim().toLowerCase(),
         display_name: onboarding.displayName.trim() || onboarding.username.trim(),
-      });
+        fitness_goal: onboarding.fitnessGoal || 'general_fitness',
+        fitness_experience: onboarding.fitnessExperience || 'beginner',
+        training_location: onboarding.trainingLocation || 'home',
+        available_daily_time: onboarding.availableDailyTime || 30,
+      } as any);
       if (!profileResult.success) {
-        Alert.alert('Error', 'Could not create your profile. Please try again.');
+        console.error('[Onboarding] Profile Creation Failed:', profileResult.error);
+        Alert.alert('Error', `Could not create your profile: ${profileResult.error.message}`);
         return;
       }
 
-      // 2. Create avatar config
-      await repositories.avatar.upsertAvatarConfig(userId, {
-        base_model: avatarDraft.base_model,
-        hair_id: avatarDraft.hair_id,
-        hair_color: avatarDraft.hair_color,
-        eyes_id: avatarDraft.eyes_id,
-        eye_color: avatarDraft.eye_color,
-        outfit_id: avatarDraft.outfit_id,
-        aura_id: avatarDraft.aura_id,
-        accessory_id: avatarDraft.accessory_id,
+      // 2. Create avatar config (store gender in base_model)
+      const gender = onboarding.gender || 'male';
+      const avatarResult = await repositories.avatar.upsertAvatarConfig(userId, {
+        base_model: gender,
       });
+      if (!avatarResult.success) {
+        console.error('[Onboarding] Avatar Config Failed:', avatarResult.error);
+        Alert.alert('Error', `Could not save your avatar: ${avatarResult.error.message}`);
+        return;
+      }
 
       // 3. Track initial skills
       for (const skillId of onboarding.selectedSkillIds) {
-        await repositories.userSkills.trackSkill(userId, skillId);
+        const skillResult = await repositories.userSkills.trackSkill(userId, skillId);
+        if (!skillResult.success) {
+          console.error(
+            `[Onboarding] Skill Tracking Failed for skill ${skillId}:`,
+            skillResult.error,
+          );
+          // Do not return here, we can try to proceed even if one skill fails, or we can just log it.
+        }
       }
 
       // 4. Mark onboarding complete in Supabase user metadata
@@ -91,12 +100,15 @@ export default function PermissionsScreen() {
 
       // 5. Reset transient stores
       onboarding.reset();
-      useAvatarBuilderStore.getState().resetDraft();
 
       // 6. Navigate to main app
       router.replace('/(app)/(tabs)/');
-    } catch {
-      Alert.alert('Something went wrong', 'Please try again.');
+    } catch (error) {
+      console.error('[Onboarding] Unexpected Error:', error);
+      Alert.alert(
+        'Something went wrong',
+        error instanceof Error ? error.message : 'Please try again.',
+      );
     } finally {
       setIsSubmitting(false);
     }
@@ -121,18 +133,25 @@ export default function PermissionsScreen() {
   return (
     <ScreenContainer>
       <View style={styles.container}>
-        <ProgressStepper currentStep={4} totalSteps={5} />
+        <ScrollView
+          contentContainerStyle={styles.contentScroll}
+          showsVerticalScrollIndicator={false}
+        >
+          <ProgressStepper currentStep={5} totalSteps={6} />
 
-        <Animated.View entering={FadeIn} style={styles.content}>
-          <Text style={styles.step}>STEP 5 OF 5</Text>
-          <Text style={styles.title}>One Last Thing</Text>
-          <Text style={styles.subtitle}>
-            Enable notifications to get reminded about your daily quests and milestone events.
-          </Text>
+          <View style={styles.header}>
+            <Text style={styles.step}>STEP 6 OF 6</Text>
+            <Text style={styles.title}>One Last Thing</Text>
+            <Text style={styles.subtitle}>
+              Enable notifications to get reminded about your daily quests and milestone events.
+            </Text>
+          </View>
 
           {/* Notification card */}
           <GlassCard style={styles.notifCard} variant="elevated">
-            <Text style={styles.notifEmoji}>🔔</Text>
+            <View style={{ alignItems: 'center', marginBottom: 8 }}>
+              <BellPremiumIcon color={colors.purple.neon} size={80} />
+            </View>
             <Text style={styles.notifTitle}>Stay in the Game</Text>
             <Text style={styles.notifBody}>
               Get daily quest reminders, XP milestone alerts, and level-up celebrations. You can
@@ -167,15 +186,17 @@ export default function PermissionsScreen() {
               <Text style={styles.summaryValue}>@{onboarding.username || '—'}</Text>
             </View>
             <View style={styles.summaryRow}>
-              <Text style={styles.summaryLabel}>Goals</Text>
-              <Text style={styles.summaryValue}>{onboarding.selectedGoalIds.length} selected</Text>
+              <Text style={styles.summaryLabel}>Goals:</Text>
+              <Text style={styles.summaryValue}>
+                {onboarding.fitnessGoal ? onboarding.fitnessGoal.replace('_', ' ') : 'None'}
+              </Text>
             </View>
             <View style={styles.summaryRow}>
               <Text style={styles.summaryLabel}>Skills</Text>
               <Text style={styles.summaryValue}>{onboarding.selectedSkillIds.length} selected</Text>
             </View>
           </GlassCard>
-        </Animated.View>
+        </ScrollView>
 
         <Animated.View style={[styles.footer, submitStyle]}>
           <Button
@@ -212,6 +233,10 @@ const styles = StyleSheet.create({
   content: {
     flex: 1,
   },
+  contentScroll: {
+    flexGrow: 1,
+    paddingBottom: 20,
+  },
   step: {
     fontFamily: fontFamily.inter.semiBold,
     fontSize: 11,
@@ -220,6 +245,9 @@ const styles = StyleSheet.create({
     textTransform: 'uppercase',
     marginBottom: 8,
     marginTop: 20,
+  },
+  header: {
+    marginBottom: 24,
   },
   title: {
     fontFamily: fontFamily.rajdhani.bold,

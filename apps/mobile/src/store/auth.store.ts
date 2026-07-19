@@ -25,6 +25,7 @@ import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
 import { immer } from 'zustand/middleware/immer';
 import type { Session, User } from '@supabase/supabase-js';
+import { supabase } from '@lib/supabase';
 import { mmkvZustandStorage } from '@lib/storage';
 
 // ── State Shape ───────────────────────────────────────────────────────────
@@ -86,7 +87,8 @@ export const useAuthStore = create<AuthStore>()(
         });
       },
 
-      signOut: () => {
+      signOut: async () => {
+        await supabase.auth.signOut();
         set((state) => {
           state.session = null;
           state.user = null;

@@ -14,12 +14,12 @@
  *   active — neon purple border glow for selected/focused states
  */
 import { type ReactNode } from 'react';
-import { StyleSheet, View, type ViewStyle } from 'react-native';
+import { StyleSheet, View, type ViewStyle, type StyleProp } from 'react-native';
 import { colors, radius, elevation } from '@theme';
 
 interface GlassCardProps {
   children: ReactNode;
-  style?: ViewStyle;
+  style?: StyleProp<ViewStyle>;
   variant?: 'default' | 'elevated' | 'active';
   padding?: number;
 }

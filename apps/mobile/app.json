@@ -7,12 +7,6 @@
     "icon": "./assets/icon.png",
     "scheme": "realleveling",
     "userInterfaceStyle": "dark",
-    "newArchEnabled": true,
-    "splash": {
-      "image": "./assets/splash-icon.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#03030A"
-    },
     "ios": {
       "supportsTablet": false,
       "bundleIdentifier": "com.realleveling.app",
@@ -26,9 +20,7 @@
         "foregroundImage": "./assets/android-icon-foreground.png",
         "backgroundImage": "./assets/android-icon-background.png"
       },
-      "permissions": [
-        "android.permission.RECEIVE_BOOT_COMPLETED"
-      ]
+      "permissions": ["android.permission.RECEIVE_BOOT_COMPLETED"]
     },
     "plugins": [
       "expo-router",

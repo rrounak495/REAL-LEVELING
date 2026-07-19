@@ -1,13 +1,11 @@
 /**
- * app/(app)/(tabs)/_layout.tsx — Bottom Tab Navigator
+ * app/(app)/(tabs)/_layout.tsx — Premium Floating Tab Navigator
  *
- * Defines the 5 main tabs. Tab order is deliberate:
- * Home → Quests → [Center/Profile] → Friends → Shop
- *
- * Tab bar is styled with our void/glass design language.
- * Icons: Sprint 3 will replace text labels with Phosphor icons.
+ * 5 tabs: Home, Tasks, Feed, Ranks, Profile
+ * Uses the custom FloatingTabBar for a premium glass navigation experience.
  */
 import { Tabs } from 'expo-router';
+import { FloatingTabBar } from '@/components/navigation/FloatingTabBar';
 import { colors } from '@theme';
 
 export default function TabsLayout() {
@@ -16,27 +14,19 @@ export default function TabsLayout() {
       screenOptions={{
         headerShown: false,
         tabBarStyle: {
-          backgroundColor: colors.bg.elevated,
-          borderTopColor: 'rgba(139, 60, 247, 0.20)',
-          borderTopWidth: 1,
-          height: 64,
-          paddingBottom: 8,
-          paddingTop: 8,
-        },
-        tabBarActiveTintColor: colors.purple[400],
-        tabBarInactiveTintColor: colors.text.muted,
-        tabBarLabelStyle: {
-          fontFamily: 'Exo2_600SemiBold',
-          fontSize: 11,
-          letterSpacing: 0.5,
+          display: 'none',
+          borderTopWidth: 0,
+          elevation: 0,
+          backgroundColor: 'transparent',
         },
       }}
+      tabBar={(props) => <FloatingTabBar {...props} />}
     >
       <Tabs.Screen name="index" options={{ title: 'Home' }} />
-      <Tabs.Screen name="quests" options={{ title: 'Quests' }} />
+      <Tabs.Screen name="tasks" options={{ title: 'Tasks' }} />
+      <Tabs.Screen name="feed" options={{ title: 'Feed' }} />
+      <Tabs.Screen name="ranks" options={{ title: 'Ranks' }} />
       <Tabs.Screen name="profile" options={{ title: 'Profile' }} />
-      <Tabs.Screen name="friends" options={{ title: 'Friends' }} />
-      <Tabs.Screen name="shop" options={{ title: 'Shop' }} />
     </Tabs>
   );
 }

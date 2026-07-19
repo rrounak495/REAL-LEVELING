@@ -6,6 +6,7 @@ import {
   StyleSheet,
   Text,
   View,
+  ScrollView,
   KeyboardAvoidingView,
   Platform,
   ActivityIndicator,
@@ -88,11 +89,11 @@ export default function UsernameScreen() {
         behavior={Platform.OS === 'ios' ? 'padding' : undefined}
         style={{ flex: 1 }}
       >
-        <View style={styles.container}>
-          <ProgressStepper currentStep={0} totalSteps={5} />
+        <ScrollView contentContainerStyle={styles.container} showsVerticalScrollIndicator={false}>
+          <ProgressStepper currentStep={0} totalSteps={6} />
 
           <View style={styles.header}>
-            <Text style={styles.step}>STEP 1 OF 5</Text>
+            <Text style={styles.step}>STEP 1 OF 6</Text>
             <Text style={styles.title}>Choose Your Hunter Name</Text>
             <Text style={styles.subtitle}>
               This is your identity in the Hunter World. Choose wisely — it cannot be changed
@@ -148,7 +149,7 @@ export default function UsernameScreen() {
           >
             Confirm Hunter Name
           </Button>
-        </View>
+        </ScrollView>
       </KeyboardAvoidingView>
     </ScreenContainer>
   );
@@ -156,7 +157,7 @@ export default function UsernameScreen() {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flexGrow: 1,
     paddingHorizontal: 24,
     paddingTop: 20,
     paddingBottom: 32,

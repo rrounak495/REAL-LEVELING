@@ -6,14 +6,16 @@
  */
 
 export enum Rank {
-  IRON = 'Iron',
-  BRONZE = 'Bronze',
-  SILVER = 'Silver',
-  GOLD = 'Gold',
-  PLATINUM = 'Platinum',
-  DIAMOND = 'Diamond',
-  MASTER = 'Master',
-  SHADOW = 'Shadow',
+  UNRANKED = 'Unranked',
+  E_RANK = 'E Rank',
+  D_RANK = 'D Rank',
+  C_RANK = 'C Rank',
+  B_RANK = 'B Rank',
+  A_RANK = 'A Rank',
+  S_RANK = 'S Rank',
+  SS_RANK = 'SS Rank',
+  SSS_RANK = 'SSS Rank',
+  NATIONAL_RANK = 'National Rank',
   MONARCH = 'Monarch',
 }
 
@@ -24,15 +26,17 @@ interface RankThreshold {
 
 // Ensure this remains sorted descending for easy searching
 const RANK_THRESHOLDS: RankThreshold[] = [
-  { rank: Rank.MONARCH, minLevel: 100 },
-  { rank: Rank.SHADOW, minLevel: 80 },
-  { rank: Rank.MASTER, minLevel: 60 },
-  { rank: Rank.DIAMOND, minLevel: 50 },
-  { rank: Rank.PLATINUM, minLevel: 40 },
-  { rank: Rank.GOLD, minLevel: 30 },
-  { rank: Rank.SILVER, minLevel: 20 },
-  { rank: Rank.BRONZE, minLevel: 10 },
-  { rank: Rank.IRON, minLevel: 1 },
+  { rank: Rank.MONARCH, minLevel: 150 },
+  { rank: Rank.NATIONAL_RANK, minLevel: 100 },
+  { rank: Rank.SSS_RANK, minLevel: 95 },
+  { rank: Rank.SS_RANK, minLevel: 90 },
+  { rank: Rank.S_RANK, minLevel: 80 },
+  { rank: Rank.A_RANK, minLevel: 60 },
+  { rank: Rank.B_RANK, minLevel: 40 },
+  { rank: Rank.C_RANK, minLevel: 20 },
+  { rank: Rank.D_RANK, minLevel: 10 },
+  { rank: Rank.E_RANK, minLevel: 5 },
+  { rank: Rank.UNRANKED, minLevel: 1 },
 ];
 
 export class RankEngine {
@@ -45,7 +49,7 @@ export class RankEngine {
         return threshold.rank;
       }
     }
-    return Rank.IRON; // Fallback
+    return Rank.UNRANKED; // Fallback
   }
 
   /**

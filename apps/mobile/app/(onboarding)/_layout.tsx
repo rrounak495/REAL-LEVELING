@@ -37,6 +37,8 @@ export default function OnboardingLayout() {
       <Stack.Screen name="username" />
       <Stack.Screen name="avatar" />
       <Stack.Screen name="goals" />
+      <Stack.Screen name="experience" />
+      <Stack.Screen name="logistics" />
       <Stack.Screen name="skills" />
       <Stack.Screen name="permissions" />
     </Stack>

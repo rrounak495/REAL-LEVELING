@@ -18,4 +18,5 @@
 export { useAuthStore, selectIsAuthenticated, selectUserId, selectUserEmail } from './auth.store';
 export { useOnboardingStore, ONBOARDING_GOALS } from './onboarding.store';
 export type { OnboardingGoal } from './onboarding.store';
+export * from './journey.store';
 export * from './progression.store';

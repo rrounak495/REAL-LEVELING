@@ -10,25 +10,38 @@ import { SelectionCard } from '@/components/ui/SelectionCard';
 import { ProgressStepper } from '@/components/ui/ProgressStepper';
 import { useOnboardingStore, ONBOARDING_GOALS } from '@store';
 import { colors, fontFamily } from '@theme';
+import { GoalFireIcon, GoalMuscleIcon, GoalZenIcon } from '@/components/ui/OnboardingIcons';
+import type { ReactElement } from 'react';
+
+const GOAL_ICON_MAP: Record<string, (selected: boolean) => ReactElement> = {
+  weight_loss: (sel) => (
+    <GoalFireIcon color={sel ? colors.purple.neon : colors.text.secondary} size={36} />
+  ),
+  muscle_gain: (sel) => (
+    <GoalMuscleIcon color={sel ? colors.purple.neon : colors.text.secondary} size={36} />
+  ),
+  general_fitness: (sel) => (
+    <GoalZenIcon color={sel ? colors.purple.neon : colors.text.secondary} size={36} />
+  ),
+};
 
 export default function GoalsScreen() {
-  const { selectedGoalIds, toggleGoal } = useOnboardingStore();
+  const { fitnessGoal, setFitnessGoal } = useOnboardingStore();
 
-  const canContinue = selectedGoalIds.length >= 1;
+  const canContinue = fitnessGoal !== null;
 
   return (
     <ScreenContainer>
       <View style={styles.container}>
-        <ProgressStepper currentStep={2} totalSteps={5} />
+        <ProgressStepper currentStep={2} totalSteps={6} />
 
         <View style={styles.header}>
-          <Text style={styles.step}>STEP 3 OF 5</Text>
+          <Text style={styles.step}>STEP 2 OF 6</Text>
           <Text style={styles.title}>Choose Your Goals</Text>
           <Text style={styles.subtitle}>
-            Select up to 3 areas you want to level up. Your journey will be personalized around
-            these.
+            Select your primary path. Your missions and progression will be personalized based on
+            this goal.
           </Text>
-          <Text style={styles.selectionCount}>{selectedGoalIds.length}/3 selected</Text>
         </View>
 
         <ScrollView
@@ -37,18 +50,21 @@ export default function GoalsScreen() {
           style={styles.list}
         >
           {ONBOARDING_GOALS.map((goal, index) => {
-            const isSelected = selectedGoalIds.includes(goal.id);
-            const isDisabled = !isSelected && selectedGoalIds.length >= 3;
+            const isSelected = fitnessGoal === goal.id;
             return (
               <Animated.View key={goal.id} entering={FadeInDown.delay(index * 50).springify()}>
                 <SelectionCard
                   description={goal.description}
-                  icon={<Text style={styles.goalIcon}>{goal.icon}</Text>}
-                  isDisabled={isDisabled}
-                  isSelected={isSelected}
+                  icon={
+                    GOAL_ICON_MAP[goal.id]?.(fitnessGoal === goal.id) ?? (
+                      <Text style={styles.goalIcon}>{goal.icon}</Text>
+                    )
+                  }
+                  isDisabled={false}
+                  isSelected={fitnessGoal === goal.id}
                   testID={`goal-${goal.id}`}
                   title={goal.label}
-                  onPress={() => toggleGoal(goal.id)}
+                  onPress={() => setFitnessGoal(goal.id as any)}
                 />
               </Animated.View>
             );
@@ -59,9 +75,9 @@ export default function GoalsScreen() {
           <Button
             disabled={!canContinue}
             size="lg"
-            onPress={() => router.push('/(onboarding)/skills')}
+            onPress={() => router.push('/(onboarding)/experience')}
           >
-            Continue to Skills →
+            Continue →
           </Button>
         </View>
       </View>

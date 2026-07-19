@@ -25,30 +25,34 @@ export class ProgressionService {
     }
 
     // 1. Read current local state
-    const { xp: currentXp, level, rank } = useProgressionStore.getState();
+    const { totalXp, currentLevel, currentRank } = useProgressionStore.getState();
 
     const currentState: ProgressionState = {
-      totalXp: currentXp,
-      level,
-      rank: rank as Rank,
+      totalXp: totalXp,
+      level: currentLevel,
+      rank: currentRank as Rank,
     };
 
     // 2. Calculate new state via pure math engine
     const result = XPEngine.addXp(currentState, baseAmount, multipliers);
 
     // 3. Update local state immediately (Optimistic Update)
-    useProgressionStore.getState().setProgression({
-      xp: result.newState.totalXp,
-      level: result.newState.level,
-      rank: result.newState.rank,
+    useProgressionStore.setState((state) => {
+      state.totalXp = result.newState.totalXp;
+      state.currentLevel = result.newState.level;
+      state.currentRank = result.newState.rank;
     });
 
     // 4. Sync to remote database (Fire and forget, or await)
     try {
-      await repositories.profiles.updateProfile(userId, {
-        xp: result.newState.totalXp,
-        level: result.newState.level,
-        rank: result.newState.rank,
+      const getRes = await repositories.progression.getProgression(userId);
+      if (!getRes.success) {
+        await repositories.progression.initializeProgression(userId);
+      }
+      await repositories.progression.updateProgression(userId, {
+        total_xp: result.newState.totalXp,
+        current_level: result.newState.level,
+        current_rank: result.newState.rank,
       });
     } catch (e) {
       console.error('[ProgressionService] Failed to sync XP to remote database', e);
@@ -76,15 +80,21 @@ export class ProgressionService {
     const newAmount = store[type] + amount;
 
     // Optimistic UI update
-    if (type === 'coins') {
-      store.addCoins(amount);
-    } else {
-      store.addGems(amount);
-    }
+    useProgressionStore.setState((state) => {
+      if (type === 'coins') {
+        state.coins += amount;
+      } else {
+        state.gems += amount;
+      }
+    });
 
     // Remote sync
     try {
-      await repositories.profiles.updateProfile(userId, {
+      const getRes = await repositories.progression.getProgression(userId);
+      if (!getRes.success) {
+        await repositories.progression.initializeProgression(userId);
+      }
+      await repositories.progression.updateProgression(userId, {
         [type]: newAmount,
       });
     } catch (e) {

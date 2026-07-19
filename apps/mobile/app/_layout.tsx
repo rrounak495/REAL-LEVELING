@@ -16,10 +16,12 @@
  * 7. Stack navigator   — Expo Router navigation shell
  */
 import { useEffect } from 'react';
-import { Stack } from 'expo-router';
+import { Stack, ErrorBoundary } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { QueryClientProvider } from '@tanstack/react-query';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { GlobalPopupQueue } from '@/components/ui/GlobalPopupQueue';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 import * as SplashScreen from 'expo-splash-screen';
 import { useFonts, Rajdhani_600SemiBold, Rajdhani_700Bold } from '@expo-google-fonts/rajdhani';
 import { Exo2_400Regular, Exo2_600SemiBold, Exo2_700Bold } from '@expo-google-fonts/exo-2';
@@ -43,9 +45,16 @@ validateEnv();
 // We control when it hides — after fonts load and auth initializes.
 SplashScreen.preventAutoHideAsync();
 
+// ── DEV OVERRIDE: Skip Auth ─────────────────────────────────────────────
+const SKIP_AUTH_FOR_DEV = true;
+
+export { ErrorBoundary };
+
 export default function RootLayout() {
+  console.log('[DEBUG] RootLayout rendering');
   const setSession = useAuthStore((s) => s.setSession);
   const setInitialized = useAuthStore((s) => s.setInitialized);
+  const isInitialized = useAuthStore((s) => s.isInitialized);
 
   // ── Step 3: Load all design system fonts ───────────────────────────────
   const [fontsLoaded, fontError] = useFonts({
@@ -63,11 +72,61 @@ export default function RootLayout() {
 
   // ── Step 4: Initialize Supabase auth ───────────────────────────────────
   useEffect(() => {
-    // Get the initial session (from persisted MMKV storage)
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setSession(session);
-      setInitialized(true);
-    });
+    let isMounted = true;
+    let authTimeout: ReturnType<typeof setTimeout>;
+
+    const initAuth = async () => {
+      console.log('[DEBUG] initAuth started');
+      try {
+        if (SKIP_AUTH_FOR_DEV) {
+          console.log('[DEBUG] using dev bypass auth');
+          // Dev bypass: Auto sign in or sign up test user
+          const { data, error } = await supabase.auth.signInWithPassword({
+            email: 'test@real-leveling.com',
+            password: 'password123',
+          });
+
+          if (error && error.message.includes('Invalid login credentials')) {
+            // User doesn't exist, create it
+            await supabase.auth.signUp({
+              email: 'test@real-leveling.com',
+              password: 'password123',
+            });
+            // Try sign in again just in case
+            await supabase.auth.signInWithPassword({
+              email: 'test@real-leveling.com',
+              password: 'password123',
+            });
+          }
+        }
+
+        // Get the initial session
+        console.log('[DEBUG] Fetching Supabase session...');
+        const {
+          data: { session },
+        } = await supabase.auth.getSession();
+        console.log('[DEBUG] Session fetched:', session ? 'Exists' : 'None');
+        if (isMounted) setSession(session);
+      } catch (error) {
+        console.error('[Supabase Auth Error]', error);
+      } finally {
+        if (isMounted) {
+          console.log('[DEBUG] Setting isInitialized to true');
+          setInitialized(true);
+          clearTimeout(authTimeout);
+        }
+      }
+    };
+
+    // Fallback timeout in case initAuth hangs forever
+    authTimeout = setTimeout(() => {
+      console.error('[DEBUG] initAuth TIMED OUT after 10 seconds. Forcing initialization.');
+      if (isMounted) {
+        setInitialized(true);
+      }
+    }, 10000);
+
+    initAuth();
 
     // Listen for auth state changes throughout the session
     const {
@@ -77,30 +136,35 @@ export default function RootLayout() {
     });
 
     return () => {
+      isMounted = false;
+      clearTimeout(authTimeout);
       subscription.unsubscribe();
     };
   }, [setSession, setInitialized]);
 
   // ── Step 5: Hide splash screen when ready ─────────────────────────────
   useEffect(() => {
-    if (fontsLoaded || fontError) {
+    if ((fontsLoaded || fontError) && isInitialized) {
       SplashScreen.hideAsync();
     }
-  }, [fontsLoaded, fontError]);
+  }, [fontsLoaded, fontError, isInitialized]);
 
-  // Don't render until fonts are ready — prevents layout shift
-  if (!fontsLoaded && !fontError) {
+  // Don't render until fonts and auth are ready — prevents layout shift and blank screens
+  if ((!fontsLoaded && !fontError) || !isInitialized) {
     return null;
   }
 
   return (
     // ── GestureHandler must be the outermost wrapper ─────────────────
     <GestureHandlerRootView style={{ flex: 1 }}>
-      <QueryClientProvider client={queryClient}>
-        {/* Dark status bar matches our void background */}
-        <StatusBar style="light" />
-        <Stack screenOptions={{ headerShown: false, animation: 'slide_from_right' }} />
-      </QueryClientProvider>
+      <SafeAreaProvider>
+        <QueryClientProvider client={queryClient}>
+          {/* Dark status bar matches our void background */}
+          <StatusBar style="light" />
+          <Stack screenOptions={{ headerShown: false, animation: 'slide_from_right' }} />
+          <GlobalPopupQueue />
+        </QueryClientProvider>
+      </SafeAreaProvider>
     </GestureHandlerRootView>
   );
 }

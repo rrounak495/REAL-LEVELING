@@ -12,6 +12,7 @@ import Animated, {
   useSharedValue,
   withSpring,
   withTiming,
+  withSequence,
 } from 'react-native-reanimated';
 import { colors, fontFamily, motionDuration, radius, springConfigs } from '@theme';
 
@@ -41,10 +42,10 @@ export function SelectionCard({
 
   const handlePress = () => {
     // eslint-disable-next-line react-hooks/immutability
-    scale.value = withSpring(0.95, springConfigs.stiff, () => {
-      // eslint-disable-next-line react-hooks/immutability
-      scale.value = withSpring(1, springConfigs.elastic);
-    });
+    scale.value = withSequence(
+      withSpring(0.95, springConfigs.stiff),
+      withSpring(1, springConfigs.elastic),
+    );
     // eslint-disable-next-line react-hooks/immutability
     glowOpacity.value = withTiming(isSelected ? 0 : 1, { duration: motionDuration.quick });
 
