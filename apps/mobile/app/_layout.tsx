@@ -36,6 +36,7 @@ import { queryClient } from '@lib/query-client';
 import { supabase } from '@lib/supabase';
 import { validateEnv } from '@lib/env';
 import { useAuthStore } from '@store';
+import { authService } from '@/features/auth/services';
 
 // ── Step 1: Validate environment on module load ───────────────────────────
 // Throws immediately with a clear error if any required env var is missing.
@@ -44,9 +45,6 @@ validateEnv();
 // ── Step 2: Prevent splash screen from auto-hiding ───────────────────────
 // We control when it hides — after fonts load and auth initializes.
 SplashScreen.preventAutoHideAsync();
-
-// ── DEV OVERRIDE: Skip Auth ─────────────────────────────────────────────
-const SKIP_AUTH_FOR_DEV = true;
 
 export { ErrorBoundary };
 
@@ -78,37 +76,15 @@ export default function RootLayout() {
     const initAuth = async () => {
       console.log('[DEBUG] initAuth started');
       try {
-        if (SKIP_AUTH_FOR_DEV) {
-          console.log('[DEBUG] using dev bypass auth');
-          // Dev bypass: Auto sign in or sign up test user
-          const { data, error } = await supabase.auth.signInWithPassword({
-            email: 'test@real-leveling.com',
-            password: 'password123',
-          });
-
-          if (error && error.message.includes('Invalid login credentials')) {
-            // User doesn't exist, create it
-            await supabase.auth.signUp({
-              email: 'test@real-leveling.com',
-              password: 'password123',
-            });
-            // Try sign in again just in case
-            await supabase.auth.signInWithPassword({
-              email: 'test@real-leveling.com',
-              password: 'password123',
-            });
-          }
-        }
-
-        // Get the initial session
-        console.log('[DEBUG] Fetching Supabase session...');
+        // Get the initial session via our Auth Layer (Development or Production)
+        console.log('[DEBUG] Fetching session...');
         const {
           data: { session },
-        } = await supabase.auth.getSession();
+        } = await authService.getSession();
         console.log('[DEBUG] Session fetched:', session ? 'Exists' : 'None');
         if (isMounted) setSession(session);
       } catch (error) {
-        console.error('[Supabase Auth Error]', error);
+        console.error('[Auth Error]', error);
       } finally {
         if (isMounted) {
           console.log('[DEBUG] Setting isInitialized to true');
@@ -131,7 +107,7 @@ export default function RootLayout() {
     // Listen for auth state changes throughout the session
     const {
       data: { subscription },
-    } = supabase.auth.onAuthStateChange((_event, session) => {
+    } = authService.onAuthStateChange((_event, session) => {
       setSession(session);
     });
 

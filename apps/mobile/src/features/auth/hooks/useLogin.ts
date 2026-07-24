@@ -10,7 +10,7 @@ import { useCallback, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import { supabase } from '@lib/supabase';
+import { authService } from '../services';
 import { useAuthStore } from '@store';
 
 const loginSchema = z.object({
@@ -42,7 +42,7 @@ export function useLogin(): UseLoginReturn {
       setServerError(null);
       setIsLoading(true);
       try {
-        const { data: authData, error } = await supabase.auth.signInWithPassword({
+        const { data: authData, error } = await authService.signInWithPassword({
           email: data.email.trim().toLowerCase(),
           password: data.password,
         });

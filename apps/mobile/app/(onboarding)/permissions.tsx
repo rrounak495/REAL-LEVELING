@@ -28,7 +28,7 @@ import { GlassCard } from '@/components/ui/GlassCard';
 import { ProgressStepper } from '@/components/ui/ProgressStepper';
 import { useOnboardingStore } from '@store';
 import { repositories } from '@/db/repositories';
-import { supabase } from '@lib/supabase';
+import { authService } from '@/features/auth/services';
 import { getCurrentUserId } from '@lib/supabase';
 import { colors, fontFamily } from '@theme';
 import { BellPremiumIcon } from '@/components/ui/OnboardingIcons';
@@ -48,53 +48,57 @@ export default function PermissionsScreen() {
   const submitOnboarding = async () => {
     setIsSubmitting(true);
     try {
-      const userId = await getCurrentUserId();
+      const { data } = await authService.getSession();
+      const userId = data?.session?.user?.id;
+      const isDevUser = __DEV__ && data?.session?.user?.email?.endsWith('@real-leveling.dev');
+
       if (!userId) {
         Alert.alert('Session Expired', 'Please sign in again.');
         router.replace('/(auth)/welcome');
         return;
       }
 
-      const profileResult = await repositories.profiles.upsertProfile(userId, {
-        id: userId,
-        username: onboarding.username.trim().toLowerCase(),
-        display_name: onboarding.displayName.trim() || onboarding.username.trim(),
-        fitness_goal: onboarding.fitnessGoal || 'general_fitness',
-        fitness_experience: onboarding.fitnessExperience || 'beginner',
-        training_location: onboarding.trainingLocation || 'home',
-        available_daily_time: onboarding.availableDailyTime || 30,
-      } as any);
-      if (!profileResult.success) {
-        console.error('[Onboarding] Profile Creation Failed:', profileResult.error);
-        Alert.alert('Error', `Could not create your profile: ${profileResult.error.message}`);
-        return;
-      }
+      if (!isDevUser) {
+        const profileResult = await repositories.profiles.upsertProfile(userId, {
+          id: userId,
+          username: onboarding.username.trim().toLowerCase(),
+          display_name: onboarding.displayName.trim() || onboarding.username.trim(),
+          fitness_goal: onboarding.fitnessGoal || 'general_fitness',
+          fitness_experience: onboarding.fitnessExperience || 'beginner',
+          training_location: onboarding.trainingLocation || 'home',
+          available_daily_time: onboarding.availableDailyTime || 30,
+        } as any);
+        if (!profileResult.success) {
+          console.error('[Onboarding] Profile Creation Failed:', profileResult.error);
+          Alert.alert('Error', `Could not create your profile: ${profileResult.error.message}`);
+          return;
+        }
 
-      // 2. Create avatar config (store gender in base_model)
-      const gender = onboarding.gender || 'male';
-      const avatarResult = await repositories.avatar.upsertAvatarConfig(userId, {
-        base_model: gender,
-      });
-      if (!avatarResult.success) {
-        console.error('[Onboarding] Avatar Config Failed:', avatarResult.error);
-        Alert.alert('Error', `Could not save your avatar: ${avatarResult.error.message}`);
-        return;
-      }
+        // 2. Create avatar config (store gender in base_model)
+        const gender = onboarding.gender || 'male';
+        const avatarResult = await repositories.avatar.upsertAvatarConfig(userId, {
+          base_model: gender,
+        });
+        if (!avatarResult.success) {
+          console.error('[Onboarding] Avatar Config Failed:', avatarResult.error);
+          Alert.alert('Error', `Could not save your avatar: ${avatarResult.error.message}`);
+          return;
+        }
 
-      // 3. Track initial skills
-      for (const skillId of onboarding.selectedSkillIds) {
-        const skillResult = await repositories.userSkills.trackSkill(userId, skillId);
-        if (!skillResult.success) {
-          console.error(
-            `[Onboarding] Skill Tracking Failed for skill ${skillId}:`,
-            skillResult.error,
-          );
-          // Do not return here, we can try to proceed even if one skill fails, or we can just log it.
+        // 3. Track initial skills
+        for (const skillId of onboarding.selectedSkillIds) {
+          const skillResult = await repositories.userSkills.trackSkill(userId, skillId);
+          if (!skillResult.success) {
+            console.error(
+              `[Onboarding] Skill Tracking Failed for skill ${skillId}:`,
+              skillResult.error,
+            );
+          }
         }
       }
 
-      // 4. Mark onboarding complete in Supabase user metadata
-      await supabase.auth.updateUser({
+      // 4. Mark onboarding complete in Supabase Auth via authService
+      await authService.updateUser({
         data: { onboarding_completed: true },
       });
 

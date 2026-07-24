@@ -32,7 +32,7 @@ function GenderStep({ onNext }: { onNext: () => void }) {
   };
 
   return (
-    <Animated.View entering={SlideInRight} style={styles.stepContainer}>
+    <Animated.View entering={FadeIn.duration(400)} style={styles.stepContainer}>
       <Text style={styles.stepTitle}>Choose Your Hunter</Text>
       <Text style={styles.stepSubtitle}>Your journey begins here.</Text>
 
@@ -209,7 +209,7 @@ const styles = StyleSheet.create({
     fontSize: 30,
     color: colors.text.primary,
     textAlign: 'center',
-    marginTop: 12,
+    marginTop: 24,
     marginBottom: 4,
   },
   stepSubtitle: {

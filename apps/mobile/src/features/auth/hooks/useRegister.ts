@@ -9,7 +9,7 @@ import { useCallback, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import { supabase } from '@lib/supabase';
+import { authService } from '../services';
 
 const registerSchema = z
   .object({
@@ -50,7 +50,7 @@ export function useRegister(): UseRegisterReturn {
     setServerError(null);
     setIsLoading(true);
     try {
-      const { error } = await supabase.auth.signUp({
+      const { error } = await authService.signUp({
         email: data.email.trim().toLowerCase(),
         password: data.password,
       });

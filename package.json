@@ -8,8 +8,8 @@
     "packages/*"
   ],
   "scripts": {
-    "mobile": "npm run --prefix apps/mobile start",
-    "android": "npm run --prefix apps/mobile android",
+    "mobile": "cd apps/mobile && npx expo start --dev-client -c",
+    "android": "cd apps/mobile && npx expo start --dev-client --android",
     "lint": "npm run --prefix apps/mobile lint",
     "typecheck": "npm run --prefix apps/mobile typecheck",
     "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md}\" --ignore-path .prettierignore",

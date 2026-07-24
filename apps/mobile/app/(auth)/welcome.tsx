@@ -23,6 +23,7 @@ import { router } from 'expo-router';
 import { ScreenContainer } from '@/components/ui/ScreenContainer';
 import { Button } from '@/components/ui/Button';
 import { colors, fontFamily, motionDuration } from '@theme';
+import { authService } from '@/features/auth/services';
 
 const { height } = Dimensions.get('window');
 
@@ -129,6 +130,19 @@ export default function WelcomeScreen() {
         >
           I already have an account
         </Button>
+
+        {__DEV__ && (
+          <Button
+            size="md"
+            style={Object.assign({}, styles.loginButton, { borderColor: colors.cyan.neon, borderWidth: 1 })}
+            variant="ghost"
+            onPress={async () => {
+              await authService.signInWithPassword({ email: 'testhunter@real-leveling.dev' });
+            }}
+          >
+            Continue as Test Hunter (Dev)
+          </Button>
+        )}
 
         <Text style={styles.termsText}>
           By continuing, you agree to our <Text style={styles.termsLink}>Terms of Service</Text> and{' '}

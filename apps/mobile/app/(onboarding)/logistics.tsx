@@ -16,7 +16,6 @@ import {
 const LOCATIONS = [
   { id: 'home', label: 'HOME', icon: '🏠' },
   { id: 'gym', label: 'GYM', icon: '🏋️' },
-  { id: 'both', label: 'BOTH', icon: '🌍' },
 ] as const;
 
 type LocationId = 'home' | 'gym' | 'both';

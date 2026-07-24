@@ -1,0 +1,12 @@
+{
+  "expo": {
+    "extra": {
+      "eas": {
+        "projectId": "61eaf520-0488-43f2-a0cd-074d5645fb05"
+      }
+    },
+    "android": {
+      "package": "com.rrounak49.realleveling"
+    }
+  }
+}
