@@ -5,7 +5,7 @@ import { useRouter } from 'expo-router';
 import Animated, { FadeInDown } from 'react-native-reanimated';
 import { GlassCard } from '@/components/ui/GlassCard';
 import { Button } from '@/components/ui/Button';
-import { colors, fontFamily, radius, spacing } from '@theme';
+import { colors, fontFamily, spacing } from '@theme';
 import { useSocialStore } from '@/store/social.store';
 
 export default function NotificationsScreen() {

@@ -15,7 +15,7 @@ import Animated, {
   useSharedValue,
   withSequence,
 } from 'react-native-reanimated';
-import { colors, fontFamily, radius, spacing } from '@theme';
+import { colors, fontFamily } from '@theme';
 
 const TAB_CONFIG: Record<string, { icon: string; label: string }> = {
   index: { icon: '⚔️', label: 'Home' },

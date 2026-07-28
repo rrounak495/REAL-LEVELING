@@ -14,9 +14,23 @@
 import type { SupportedStorage } from '@supabase/supabase-js';
 import type { StateStorage } from 'zustand/middleware';
 
-// EXPO GO MOCK: Replaced MMKV with an in-memory Map to preserve synchronous API
+const globalAny = globalThis as any;
+if (!globalAny.__MMKV_MOCK_STORAGE_AUTH) {
+  globalAny.__MMKV_MOCK_STORAGE_AUTH = new Map<string, string>();
+}
+if (!globalAny.__MMKV_MOCK_STORAGE_STATE) {
+  globalAny.__MMKV_MOCK_STORAGE_STATE = new Map<string, string>();
+}
+if (!globalAny.__MMKV_MOCK_STORAGE_GENERAL) {
+  globalAny.__MMKV_MOCK_STORAGE_GENERAL = new Map<string, string>();
+}
+
 class MockMMKV {
-  private storage = new Map<string, string>();
+  private storage: Map<string, string>;
+
+  constructor(storageMap: Map<string, string>) {
+    this.storage = storageMap;
+  }
 
   getString(key: string): string | undefined {
     return this.storage.get(key);
@@ -31,9 +45,9 @@ class MockMMKV {
   }
 }
 
-const authStorage = new MockMMKV();
-const stateStorage = new MockMMKV();
-export const mmkv = new MockMMKV();
+const authStorage = new MockMMKV(globalAny.__MMKV_MOCK_STORAGE_AUTH);
+const stateStorage = new MockMMKV(globalAny.__MMKV_MOCK_STORAGE_STATE);
+export const mmkv = new MockMMKV(globalAny.__MMKV_MOCK_STORAGE_GENERAL);
 
 export const mmkvSupabaseStorage: SupportedStorage = {
   getItem: (key: string): string | null => {

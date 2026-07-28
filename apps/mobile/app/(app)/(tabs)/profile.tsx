@@ -2,7 +2,7 @@
  * app/(app)/(tabs)/profile.tsx — Hunter Passport
  * Sprint 10: Hunter Life Engine
  */
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { StyleSheet, View, Text, ScrollView, useWindowDimensions, Pressable } from 'react-native';
 import { Link } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';

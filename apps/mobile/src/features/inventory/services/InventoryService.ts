@@ -7,7 +7,11 @@ import { type InventoryItem, type CosmeticCategory } from '@/types/inventory.typ
 export class InventoryService {
   async getUserInventory(userId: string): Promise<Result<InventoryItem[]>> {
     // Assuming repositories.inventory is injected in index.ts and has getUserInventory
-    return await (repositories as any).inventory.getUserInventory(userId);
+    return await (
+      repositories as unknown as {
+        inventory: { getUserInventory: (id: string) => Promise<Result<InventoryItem[]>> };
+      }
+    ).inventory.getUserInventory(userId);
   }
 
   async equipItem(
@@ -16,7 +20,11 @@ export class InventoryService {
     itemId: string,
   ): Promise<Result<void>> {
     // Requires equipment repository
-    return await (repositories as any).equipment.equipItem(userId, slotKey, itemId);
+    return await (
+      repositories as unknown as {
+        equipment: { equipItem: (uid: string, slot: string, id: string) => Promise<Result<void>> };
+      }
+    ).equipment.equipItem(userId, slotKey, itemId);
   }
 
   // Dev helpers

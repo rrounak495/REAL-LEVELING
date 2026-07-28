@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, Modal, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, Modal, TouchableOpacity } from 'react-native';
 // import { BlurView } from 'expo-blur'; // Temporarily removed to prevent native crash
 import Animated, { FadeIn, SlideInDown, ZoomIn, FadeOut } from 'react-native-reanimated';
 import { useAuthStore } from '@/store/auth.store';

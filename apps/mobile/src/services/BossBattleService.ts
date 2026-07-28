@@ -1,7 +1,7 @@
 import { repositories } from '@/db/repositories';
 import { DamageCalculationService, type ActivitySubmission } from './DamageCalculationService';
 import { type Result } from '@/lib/errors';
-import { BossRow, type BossPhaseRow } from '@/types/boss.types';
+import { type BossPhaseRow } from '@/types/boss.types';
 // import * as Crypto from 'expo-crypto'; // Removed to prevent native module crash in dev client
 
 export class BossBattleService {

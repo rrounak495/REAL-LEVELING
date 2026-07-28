@@ -20,3 +20,5 @@ export { useOnboardingStore, ONBOARDING_GOALS } from './onboarding.store';
 export type { OnboardingGoal } from './onboarding.store';
 export * from './journey.store';
 export * from './progression.store';
+export * from './chapter.store';
+export * from './dashboard.store';

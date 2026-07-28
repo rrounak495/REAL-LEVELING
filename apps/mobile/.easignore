@@ -2,10 +2,19 @@ node_modules
 *node_modules*
 .git
 .expo
+node_modules
+*node_modules*
+.git
+.expo
 dist
-android/build
-ios/build
+android/
+ios/
 android/.gradle
 *.apk
 *.aab
 *.log
+* - Copy*
+*- Copy*
+apps - Copy/
+node_modules - Copy/
+android_backup/

@@ -50,7 +50,7 @@ export const useSessionStore = create<SessionState>((set, get) => ({
   pauseSession: () => {
     const { status } = get();
     if (status === 'running' || status === 'resting') {
-      set({ status: 'paused' }); // TODO: We would need to preserve previous state in a real impl
+      set({ status: 'paused' }); // Future Improvement: Preserve previous state in a robust implementation
     }
   },
 

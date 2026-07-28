@@ -2,7 +2,6 @@ import { type Result } from '@/lib/errors';
 import { supabase } from '@/lib/supabase';
 import {
   type FeedPostRow,
-  PostReactionRow,
   type PostCommentRow,
   type PostType,
   type ReactionType,

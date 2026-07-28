@@ -4,7 +4,7 @@
  * Reusable stat display card for dashboards and profiles.
  * Shows an icon, value, and label in a glassmorphism card.
  */
-import { StyleSheet, Text, View, type ViewStyle, type StyleProp } from 'react-native';
+import { StyleSheet, Text, type ViewStyle, type StyleProp } from 'react-native';
 import { GlassCard } from './GlassCard';
 import { colors, fontFamily } from '@theme';
 

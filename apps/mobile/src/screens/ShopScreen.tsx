@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, StyleSheet, ScrollView, Text, ActivityIndicator } from 'react-native';
+import { View, StyleSheet, ScrollView, ActivityIndicator } from 'react-native';
 import { colors } from '@/theme/colors';
 import { useShopStore } from '@/store/shop.store';
 import { useAuthStore } from '@/store/auth.store';
@@ -25,7 +25,7 @@ export function ShopScreen() {
 
   useEffect(() => {
     fetchShopItems();
-  }, []);
+  }, [fetchShopItems]);
 
   const filteredItems = items.filter((item) => {
     if (selectedCategory === 'Featured' && !item.isFeatured) return false;

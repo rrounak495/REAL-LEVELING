@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, View, Text, ScrollView } from 'react-native';
 import { useRouter } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
@@ -7,7 +7,7 @@ import { ScreenContainer } from '@/components/ui/ScreenContainer';
 import { Button } from '@/components/ui/Button';
 import { GlassCard } from '@/components/ui/GlassCard';
 import { useJourneyStore } from '@/store/journey.store';
-import { colors, fontFamily, spacing, radius } from '@theme';
+import { colors, fontFamily, spacing } from '@theme';
 
 export default function JourneySuccessScreen() {
   const router = useRouter();

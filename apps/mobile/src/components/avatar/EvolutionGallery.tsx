@@ -14,7 +14,6 @@ import Animated, {
   withTiming,
   withRepeat,
   withSequence,
-  interpolateColor,
 } from 'react-native-reanimated';
 import { useAuthStore } from '@/store/auth.store';
 import { colors, fontFamily, radius, elevation } from '@theme';
@@ -178,13 +177,21 @@ export function EvolutionGallery({ currentLevel }: EvolutionGalleryProps) {
         .reverse()
         .find((s) => previousLevelRef.current >= s.level) || EVOLUTION_STAGES[0]!;
 
+    let t1: ReturnType<typeof setTimeout>;
+    let t2: ReturnType<typeof setTimeout>;
+
     if (currentEvolution.level > oldEvolution.level) {
-      setTimeout(() => setNewlyUnlockedLevel(currentEvolution.level), 0);
+      t1 = setTimeout(() => setNewlyUnlockedLevel(currentEvolution.level), 0);
       // Reset animation flag after 2 seconds
-      setTimeout(() => setNewlyUnlockedLevel(null), 2000);
+      t2 = setTimeout(() => setNewlyUnlockedLevel(null), 2000);
     }
 
     previousLevelRef.current = currentLevel;
+
+    return () => {
+      clearTimeout(t1);
+      clearTimeout(t2);
+    };
   }, [currentLevel, currentEvolution.level]);
 
   useEffect(() => {

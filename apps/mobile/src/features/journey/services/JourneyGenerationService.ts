@@ -1,9 +1,7 @@
-import { repositories } from '@/db/repositories';
 import {
   type UserJourneyInsert,
   type UserJourneyDayInsert,
 } from '@/db/repositories/supabase/JourneyRepository';
-import { AdaptiveDifficultyService } from '@/services/AdaptiveDifficultyService';
 import { type Database } from '@/types/database.types';
 
 type ProfileRow = Database['public']['Tables']['profiles']['Row'];

@@ -9,7 +9,6 @@ import Animated, {
   withTiming,
   withDelay,
   Easing,
-  runOnJS,
 } from 'react-native-reanimated';
 
 interface ParticleProps {

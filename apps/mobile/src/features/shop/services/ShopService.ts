@@ -4,9 +4,10 @@ import { type ShopItem } from '@/types/inventory.types';
 
 export class ShopService {
   async getShopCatalog(): Promise<Result<ShopItem[]>> {
-    // Uses inventory repository to fetch all items, then maps to ShopItem
-    const res = await (repositories as any).inventory.getAllItems();
-    if (!res.success) return res as any;
+    const res = await (
+      repositories as unknown as { inventory: { getAllItems: () => Promise<Result<any[]>> } }
+    ).inventory.getAllItems();
+    if (!res.success) return res as never;
 
     const shopItems: ShopItem[] = res.data.map((item: any) => ({
       ...item,

@@ -7,7 +7,7 @@ import React, { useEffect, useState, useCallback } from 'react';
 import { StyleSheet, View, Text, FlatList, Pressable, Image, RefreshControl } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import Animated, { FadeInDown } from 'react-native-reanimated';
-import { Link, useRouter } from 'expo-router';
+import { useRouter } from 'expo-router';
 import { GlassCard } from '@/components/ui/GlassCard';
 import { Button } from '@/components/ui/Button';
 import { CreatePostModal } from '@/components/feed/CreatePostModal';

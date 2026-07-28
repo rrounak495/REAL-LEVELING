@@ -14,7 +14,7 @@
     },
     "android": {
       "package": "com.realleveling.app",
-      "versionCode": 2,
+      "versionCode": 3,
       "adaptiveIcon": {
         "backgroundColor": "#03030A",
         "foregroundImage": "./assets/android-icon-foreground.png",
@@ -34,7 +34,8 @@
           "image": "./assets/splash-icon.png",
           "imageWidth": 200
         }
-      ]
+      ],
+      "@react-native-community/datetimepicker"
     ],
     "experiments": {
       "typedRoutes": false

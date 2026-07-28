@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { Text, StyleSheet } from 'react-native';
 import { type Rarity } from '@/types/inventory.types';
 import { colors } from '@/theme/colors';
 // import { BlurView } from 'expo-blur'; // Temporarily removed to prevent native crash
@@ -9,7 +9,6 @@ import Animated, {
   withSequence,
   withTiming,
   useSharedValue,
-  withSpring,
 } from 'react-native-reanimated';
 
 interface RarityBadgeProps {

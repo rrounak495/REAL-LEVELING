@@ -1,5 +1,3 @@
-import { repositories } from '@/db/repositories';
-
 export class RivalService {
   /**
    * For the prototype, we mock the rival data.

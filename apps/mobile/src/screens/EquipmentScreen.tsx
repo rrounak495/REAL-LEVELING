@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { View, StyleSheet, ScrollView, Text } from 'react-native';
 import { colors } from '@/theme/colors';
 import { useInventoryStore } from '@/store/inventory.store';

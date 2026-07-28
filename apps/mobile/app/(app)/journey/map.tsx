@@ -4,7 +4,7 @@ import { StatusBar } from 'expo-status-bar';
 import Animated, { FadeInUp } from 'react-native-reanimated';
 import { useJourneyStore } from '@store';
 import { ScreenContainer } from '@/components/ui/ScreenContainer';
-import { colors, fontFamily, spacing, radius } from '@theme';
+import { colors, fontFamily, spacing } from '@theme';
 
 export default function JourneyMapScreen() {
   const { activeJourney, journeyDays, isLoading } = useJourneyStore();

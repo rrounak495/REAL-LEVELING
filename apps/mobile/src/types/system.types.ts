@@ -73,3 +73,16 @@ export interface AddProgressResult {
   daily_chest_status?: DailyChestStatus;
   error?: string;
 }
+
+// ── UI System Messages (THE SYSTEM) ───────────────────────────────────────
+
+export type SystemMessageType = 'insight' | 'alert' | 'achievement' | 'system_update';
+
+export type SystemBadgeType = 'INFO' | 'LEVEL_UP' | 'WARNING' | 'MISSION' | 'ACHIEVEMENT';
+
+export interface SystemMessageData {
+  readonly text: string;
+  readonly type: SystemMessageType;
+  readonly badge?: SystemBadgeType;
+  readonly timestamp: string;
+}

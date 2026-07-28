@@ -11,6 +11,7 @@
  */
 import { useEffect } from 'react';
 import { StyleSheet, Text, View, Dimensions } from 'react-native';
+import { router } from 'expo-router';
 import Animated, {
   useAnimatedStyle,
   useSharedValue,
@@ -19,7 +20,6 @@ import Animated, {
   withRepeat,
   withSequence,
 } from 'react-native-reanimated';
-import { router } from 'expo-router';
 import { ScreenContainer } from '@/components/ui/ScreenContainer';
 import { Button } from '@/components/ui/Button';
 import { colors, fontFamily, motionDuration } from '@theme';
@@ -145,8 +145,14 @@ export default function WelcomeScreen() {
         )}
 
         <Text style={styles.termsText}>
-          By continuing, you agree to our <Text style={styles.termsLink}>Terms of Service</Text> and{' '}
-          <Text style={styles.termsLink}>Privacy Policy</Text>.
+          By continuing, you agree to our{' '}
+          <Text style={styles.termsLink} onPress={() => router.push('/legal/terms')}>
+            Terms & Conditions
+          </Text>{' '}
+          and{' '}
+          <Text style={styles.termsLink} onPress={() => router.push('/legal/privacy')}>
+            Privacy Policy
+          </Text>.
         </Text>
       </Animated.View>
     </ScreenContainer>

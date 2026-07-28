@@ -1,14 +1,5 @@
 import React from 'react';
-import {
-  StyleSheet,
-  View,
-  Text,
-  ScrollView,
-  ActivityIndicator,
-  Pressable,
-  StyleProp,
-  ViewStyle,
-} from 'react-native';
+import { StyleSheet, View, Text, ScrollView, ActivityIndicator, Pressable } from 'react-native';
 import { useRouter } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import Animated, { FadeInDown } from 'react-native-reanimated';
@@ -19,7 +10,7 @@ import { useJourneyStore } from '@/store/journey.store';
 import { JourneyGenerationService } from '@/features/journey/services/JourneyGenerationService';
 import { useSessionStore } from '@/store/session.store';
 import { getWorkoutForMission } from '@/features/workout/data/exerciseLibrary';
-import { colors, fontFamily, spacing, radius } from '@theme';
+import { colors, fontFamily, spacing } from '@theme';
 
 export default function JourneyTodayScreen() {
   const router = useRouter();

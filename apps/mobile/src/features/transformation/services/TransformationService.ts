@@ -1,10 +1,4 @@
-import {
-  TransformationRepository,
-  TransformationProfileRow,
-  BodyMeasurementRow,
-  StrengthRecordRow,
-  LifeHistoryStatsRow,
-} from '../repositories/TransformationRepository';
+import { TransformationRepository } from '../repositories/TransformationRepository';
 
 export class TransformationService {
   /**

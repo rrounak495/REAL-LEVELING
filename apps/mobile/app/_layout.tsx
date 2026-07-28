@@ -16,6 +16,7 @@
  * 7. Stack navigator   — Expo Router navigation shell
  */
 import { useEffect } from 'react';
+import { View, ActivityIndicator } from 'react-native';
 import { Stack, ErrorBoundary } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { QueryClientProvider } from '@tanstack/react-query';
@@ -33,14 +34,17 @@ import {
 
 import '../global.css';
 import { queryClient } from '@lib/query-client';
-import { supabase } from '@lib/supabase';
 import { validateEnv } from '@lib/env';
 import { useAuthStore } from '@store';
 import { authService } from '@/features/auth/services';
 
 // ── Step 1: Validate environment on module load ───────────────────────────
 // Throws immediately with a clear error if any required env var is missing.
-validateEnv();
+try {
+  validateEnv();
+} catch (e) {
+  console.error('[FATAL ENV ERROR]', e);
+}
 
 // ── Step 2: Prevent splash screen from auto-hiding ───────────────────────
 // We control when it hides — after fonts load and auth initializes.
@@ -127,7 +131,18 @@ export default function RootLayout() {
 
   // Don't render until fonts and auth are ready — prevents layout shift and blank screens
   if ((!fontsLoaded && !fontError) || !isInitialized) {
-    return null;
+    return (
+      <View
+        style={{
+          flex: 1,
+          backgroundColor: '#03030A',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
+      >
+        <ActivityIndicator color="#B200FF" size="large" />
+      </View>
+    );
   }
 
   return (

@@ -1,7 +1,6 @@
 import { repositories } from '@/db/repositories';
 import { JourneyGenerationService } from './JourneyGenerationService';
 import { JourneyProgressService } from './JourneyProgressService';
-import { JourneyRewardService } from './JourneyRewardService';
 
 export class JourneyService {
   /**

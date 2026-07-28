@@ -4,8 +4,6 @@ import {
   type SystemUserStateRow,
   type SystemMomentRow,
   type PersonalRecordRow,
-  RivalRow,
-  NotificationPreferencesRow,
   type AddProgressResult,
 } from '@/types/system.types';
 

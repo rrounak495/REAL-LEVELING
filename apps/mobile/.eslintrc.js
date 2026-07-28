@@ -1,7 +1,7 @@
 module.exports = {
   root: true,
   extends: ['expo', 'prettier'],
-  plugins: ['prettier'],
+  plugins: ['prettier', 'unused-imports'],
   parserOptions: {
     project: true,
     tsconfigRootDir: __dirname,
@@ -9,6 +9,13 @@ module.exports = {
   ignorePatterns: ['node_modules/', 'dist/', '.expo/', '*.js'],
   rules: {
     'prettier/prettier': 'error',
+    'no-unused-vars': 'off', // or "@typescript-eslint/no-unused-vars": "off",
+    '@typescript-eslint/no-unused-vars': 'off',
+    'unused-imports/no-unused-imports': 'error',
+    'unused-imports/no-unused-vars': [
+      'error',
+      { 'vars': 'all', 'varsIgnorePattern': '^_', 'args': 'after-used', 'argsIgnorePattern': '^_' }
+    ],
     // Downgraded to warn: widespread use of `any` in service/store layers is intentional
     // placeholder typing — will be addressed in a dedicated type refactor sprint
     '@typescript-eslint/no-explicit-any': 'warn',

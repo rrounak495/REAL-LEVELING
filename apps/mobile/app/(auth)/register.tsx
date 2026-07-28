@@ -18,6 +18,7 @@ import { AppTextInput } from '@/components/ui/TextInput';
 import { GlassCard } from '@/components/ui/GlassCard';
 import { OAuthButton } from '@/components/ui/OAuthButton';
 import { useRegister } from '@/features/auth/hooks/useRegister';
+import { useAuthStore } from '@/store/auth.store';
 import { colors, fontFamily } from '@theme';
 
 export default function RegisterScreen() {
@@ -28,6 +29,25 @@ export default function RegisterScreen() {
     setValue,
     formState: { errors },
   } = form;
+  const setSession = useAuthStore((s) => s.setSession);
+
+  const handleDevBypass = () => {
+    setSession({
+      access_token: 'dev-token',
+      refresh_token: 'dev-token',
+      expires_in: 3600,
+      expires_at: Math.floor(Date.now() / 1000) + 3600,
+      token_type: 'bearer',
+      user: {
+        id: '12345678-1234-1234-1234-123456789012',
+        app_metadata: {},
+        user_metadata: {},
+        aud: 'authenticated',
+        created_at: new Date().toISOString(),
+        email: 'testhunter@real-leveling.dev',
+      },
+    } as any);
+  };
 
   if (isSuccess) {
     return (
@@ -130,6 +150,16 @@ export default function RegisterScreen() {
                 onPress={handleSubmit(submit)}
               >
                 Create My Account
+              </Button>
+            </Animated.View>
+
+            <Animated.View entering={FadeInDown.delay(500)}>
+              <Button
+                size="lg"
+                style={{ marginTop: 12, backgroundColor: colors.semantic.success }}
+                onPress={handleDevBypass}
+              >
+                Bypass Login (Dev)
               </Button>
             </Animated.View>
           </GlassCard>

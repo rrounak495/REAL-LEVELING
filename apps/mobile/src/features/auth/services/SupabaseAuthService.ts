@@ -1,5 +1,11 @@
 import { supabase } from '@lib/supabase';
-import type { IAuthService, SignInCredentials, SignUpCredentials, AuthResponse, SessionResponse } from './IAuthService';
+import type {
+  IAuthService,
+  SignInCredentials,
+  SignUpCredentials,
+  AuthResponse,
+  SessionResponse,
+} from './IAuthService';
 import type { Session, Subscription, User, AuthError } from '@supabase/supabase-js';
 
 export class SupabaseAuthService implements IAuthService {
@@ -29,12 +35,16 @@ export class SupabaseAuthService implements IAuthService {
     return { data: { session: data.session }, error };
   }
 
-  async updateUser(attributes: { data: any }): Promise<{ data: { user: User | null }, error: AuthError | null }> {
+  async updateUser(attributes: {
+    data: any;
+  }): Promise<{ data: { user: User | null }; error: AuthError | null }> {
     const { data, error } = await supabase.auth.updateUser(attributes);
     return { data: { user: data.user }, error: error as AuthError | null };
   }
 
-  onAuthStateChange(callback: (event: string, session: Session | null) => void): { data: { subscription: Subscription } } {
+  onAuthStateChange(callback: (event: string, session: Session | null) => void): {
+    data: { subscription: Subscription };
+  } {
     const { data } = supabase.auth.onAuthStateChange(callback);
     return { data };
   }

@@ -8,7 +8,7 @@ import { GlassCard } from '@/components/ui/GlassCard';
 import { Button } from '@/components/ui/Button';
 import { useGuildStore } from '@/store/guild.store';
 import { useAuthStore } from '@/store/auth.store';
-import { colors, fontFamily, spacing, radius } from '@theme';
+import { colors, fontFamily, spacing } from '@theme';
 
 export default function GuildScreen() {
   const router = useRouter();

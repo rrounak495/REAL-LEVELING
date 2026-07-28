@@ -6,7 +6,20 @@ dist
 android/build
 ios/build
 android/.gradle
+node_modules
+*node_modules*
+.git
+.expo
+dist
+android/build
+ios/build
+android/.gradle
 *.apk
 *.aab
 *.log
 supabase/.temp
+* - Copy*
+*- Copy*
+apps - Copy/
+node_modules - Copy/
+**/android_backup/

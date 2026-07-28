@@ -1,6 +1,5 @@
 import { type Result, type AppError } from '@/lib/errors';
 import { supabase } from '@/lib/supabase';
-import * as FileSystem from 'expo-file-system';
 
 const toAppError = (e: any): AppError => ({
   name: e?.name || 'StorageError',

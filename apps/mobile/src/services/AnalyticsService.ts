@@ -7,6 +7,16 @@ export type UXEventName =
   | 'mission_started'
   | 'mission_completed'
   | 'mission_abandoned'
+  | 'mission_skipped'
+  | 'goal_created'
+  | 'goal_completed'
+  | 'xp_earned'
+  | 'level_up'
+  | 'achievement_unlock'
+  | 'focus_mode_start'
+  | 'focus_mode_end'
+  | 'recovery_usage'
+  | 'premium_screen_viewed'
   | 'boss_entered'
   | 'boss_activity_logged'
   | 'inventory_item_previewed'
@@ -22,12 +32,18 @@ export type UXEventName =
 export class AnalyticsService {
   /**
    * Centralized tracking boundary for UX events.
-   * Currently logs to console, but can be replaced with Mixpanel/Amplitude/etc.
+   * Internal layer abstracts providers (Firebase, PostHog, Mixpanel).
    */
-  static track(eventName: UXEventName, properties?: Record<string, any>) {
+  static track(eventName: UXEventName, properties?: Record<string, unknown>) {
     if (__DEV__) {
-      console.log(`[UX Analytics] ${eventName}`, properties || {});
+      console.info(`[Analytics] Tracked: ${eventName}`, properties || {});
     }
-    // Future: send to real analytics provider
+    // Future: Promise.all([ Firebase.logEvent(eventName, properties), PostHog.capture(eventName, properties) ])
+  }
+
+  static identify(userId: string, traits?: Record<string, unknown>) {
+    if (__DEV__) {
+      console.info(`[Analytics] User Identified: ${userId}`, traits || {});
+    }
   }
 }

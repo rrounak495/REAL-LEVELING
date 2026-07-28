@@ -7,7 +7,6 @@ import { useJourneyStore, useAuthStore } from '@store';
 import { repositories } from '@/db/repositories';
 import { ScreenContainer } from '@/components/ui/ScreenContainer';
 import { Button } from '@/components/ui/Button';
-import { GlassCard } from '@/components/ui/GlassCard';
 import { colors, fontFamily, spacing, radius } from '@theme';
 
 const JOURNEY_TYPES = [

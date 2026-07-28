@@ -1,10 +1,9 @@
 import { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, Pressable, Image } from 'react-native';
+import { StyleSheet, Text, View, Pressable } from 'react-native';
 import * as Haptics from 'expo-haptics';
 import Animated, {
   FadeIn,
   FadeOut,
-  SlideInRight,
   SlideInDown,
   useSharedValue,
   useAnimatedStyle,

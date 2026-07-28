@@ -1,4 +1,10 @@
-import type { IAuthService, SignInCredentials, SignUpCredentials, AuthResponse, SessionResponse } from './IAuthService';
+import type {
+  IAuthService,
+  SignInCredentials,
+  SignUpCredentials,
+  AuthResponse,
+  SessionResponse,
+} from './IAuthService';
 import type { Session, Subscription, User } from '@supabase/supabase-js';
 
 /**
@@ -24,7 +30,7 @@ function generateDeterministicUUID(email: string): string {
  */
 function createMockSession(email: string): Session {
   const userId = generateDeterministicUUID(email);
-  
+
   const mockUser: User = {
     id: userId,
     app_metadata: { provider: 'email', providers: ['email'] },
@@ -61,11 +67,19 @@ function createMockSession(email: string): Session {
  * This service bypasses Supabase entirely and mocks all authentication responses.
  * It must NOT be used in production.
  */
+const globalAny = globalThis as any;
+
 export class DevelopmentAuthService implements IAuthService {
   // We keep track of the session in memory to return in getSession()
-  // Note: Persistance across restarts is already handled by Zustand in auth.store.ts
-  private currentSession: Session | null = null;
-  private authStateCallbacks: Array<(event: string, session: Session | null) => void> = [];
+  // Uses globalThis so it survives Metro Fast Refresh during development
+  private get currentSession(): Session | null {
+    return globalAny.__DEV_AUTH_SESSION || null;
+  }
+  private set currentSession(session: Session | null) {
+    globalAny.__DEV_AUTH_SESSION = session;
+  }
+
+  private authStateCallbacks: ((event: string, session: Session | null) => void)[] = [];
 
   constructor() {
     console.log('[DEV AUTH] Initialized Development Authentication Mode');
@@ -73,20 +87,20 @@ export class DevelopmentAuthService implements IAuthService {
 
   async signInWithPassword(credentials: SignInCredentials): Promise<AuthResponse> {
     console.log(`[DEV AUTH] Sign In with mock credentials: ${credentials.email}`);
-    
+
     // Accept ANY input
     this.currentSession = createMockSession(credentials.email || 'testhunter@real-leveling.dev');
-    
+
     this.notifyListeners('SIGNED_IN', this.currentSession);
     return { data: { session: this.currentSession }, error: null };
   }
 
   async signUp(credentials: SignUpCredentials): Promise<AuthResponse> {
     console.log(`[DEV AUTH] Sign Up with mock credentials: ${credentials.email}`);
-    
+
     // Accept ANY input
     this.currentSession = createMockSession(credentials.email || 'testhunter@real-leveling.dev');
-    
+
     this.notifyListeners('SIGNED_IN', this.currentSession);
     return { data: { session: this.currentSession }, error: null };
   }
@@ -103,7 +117,9 @@ export class DevelopmentAuthService implements IAuthService {
     return { data: { session: this.currentSession }, error: null };
   }
 
-  async updateUser(attributes: { data: any }): Promise<{ data: { user: User | null }, error: null }> {
+  async updateUser(attributes: {
+    data: any;
+  }): Promise<{ data: { user: User | null }; error: null }> {
     console.log('[DEV AUTH] Update User:', attributes);
     if (this.currentSession?.user) {
       // Create deep clone of session and user to avoid read-only errors if frozen by state manager
@@ -119,17 +135,19 @@ export class DevelopmentAuthService implements IAuthService {
     return { data: { user: this.currentSession?.user || null }, error: null };
   }
 
-  onAuthStateChange(callback: (event: string, session: Session | null) => void): { data: { subscription: Subscription } } {
+  onAuthStateChange(callback: (event: string, session: Session | null) => void): {
+    data: { subscription: Subscription };
+  } {
     this.authStateCallbacks.push(callback);
-    
+
     const subscription: Subscription = {
       id: Math.random().toString(36).substr(2, 9),
       callback: () => {},
       unsubscribe: () => {
         this.authStateCallbacks = this.authStateCallbacks.filter((cb) => cb !== callback);
-      }
+      },
     };
-    
+
     return { data: { subscription } };
   }
 

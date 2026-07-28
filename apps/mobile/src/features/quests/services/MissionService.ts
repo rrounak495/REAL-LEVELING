@@ -6,7 +6,6 @@
 import { MissionGenerator, MissionType } from '../engines/MissionGenerator';
 import { repositories } from '@/db/repositories';
 import { useAuthStore } from '@/store/auth.store';
-import { MissionRow } from '@/db/repositories/supabase/MissionRepository';
 
 export class MissionService {
   /**

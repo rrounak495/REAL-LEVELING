@@ -2,13 +2,7 @@ import React, { useEffect } from 'react';
 import { StyleSheet, View, Text, Pressable, Image, ScrollView, Dimensions } from 'react-native';
 import { useRouter } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
-import Animated, {
-  FadeInDown,
-  useAnimatedStyle,
-  withTiming,
-  Easing,
-  useSharedValue,
-} from 'react-native-reanimated';
+import Animated, { FadeInDown } from 'react-native-reanimated';
 import { ScreenContainer } from '@/components/ui/ScreenContainer';
 import { GlassCard } from '@/components/ui/GlassCard';
 import { Button } from '@/components/ui/Button';

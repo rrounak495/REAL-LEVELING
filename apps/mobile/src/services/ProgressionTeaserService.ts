@@ -1,4 +1,3 @@
-import { AvatarEvolutionService } from '@/features/avatar/services/AvatarEvolutionService';
 import { getXpRequiredForNextLevel } from '@/store/progression.store';
 
 export interface TeaserInfo {

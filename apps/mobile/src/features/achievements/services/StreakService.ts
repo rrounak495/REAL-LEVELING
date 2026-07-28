@@ -2,7 +2,6 @@
  * src/features/achievements/services/StreakService.ts
  */
 import { repositories } from '@/db/repositories';
-import { UserStatsRow } from '@/db/repositories/supabase/StatsRepository';
 
 export class StreakService {
   /**

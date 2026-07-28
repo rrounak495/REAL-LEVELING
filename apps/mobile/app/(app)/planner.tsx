@@ -2,13 +2,12 @@ import React from 'react';
 import { StyleSheet, View, Text, ScrollView, Pressable } from 'react-native';
 import { useRouter } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
-import Animated, { FadeInDown } from 'react-native-reanimated';
 import { ScreenContainer } from '@/components/ui/ScreenContainer';
 import { GlassCard } from '@/components/ui/GlassCard';
 import { Button } from '@/components/ui/Button';
 import { useHabitStore } from '@/store/habit.store';
 import { useJourneyStore } from '@/store/journey.store';
-import { colors, fontFamily, spacing, radius } from '@theme';
+import { colors, fontFamily, spacing } from '@theme';
 
 export default function PlannerScreen() {
   const router = useRouter();

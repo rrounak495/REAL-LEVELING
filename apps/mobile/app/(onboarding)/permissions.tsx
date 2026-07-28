@@ -15,7 +15,6 @@ import { StyleSheet, Text, View, Alert, ScrollView } from 'react-native';
 import { router } from 'expo-router';
 import * as Notifications from 'expo-notifications';
 import Animated, {
-  FadeIn,
   useAnimatedStyle,
   useSharedValue,
   withRepeat,
@@ -26,10 +25,9 @@ import { ScreenContainer } from '@/components/ui/ScreenContainer';
 import { Button } from '@/components/ui/Button';
 import { GlassCard } from '@/components/ui/GlassCard';
 import { ProgressStepper } from '@/components/ui/ProgressStepper';
-import { useOnboardingStore } from '@store';
+import { useOnboardingStore, useAuthStore } from '@store';
 import { repositories } from '@/db/repositories';
 import { authService } from '@/features/auth/services';
-import { getCurrentUserId } from '@lib/supabase';
 import { colors, fontFamily } from '@theme';
 import { BellPremiumIcon } from '@/components/ui/OnboardingIcons';
 
@@ -48,11 +46,19 @@ export default function PermissionsScreen() {
   const submitOnboarding = async () => {
     setIsSubmitting(true);
     try {
-      const { data } = await authService.getSession();
-      const userId = data?.session?.user?.id;
-      const isDevUser = __DEV__ && data?.session?.user?.email?.endsWith('@real-leveling.dev');
+      let user = useAuthStore.getState().user;
+      let userId = user?.id;
+      const isDevUser = __DEV__ && user?.email?.endsWith('@real-leveling.dev');
 
       if (!userId) {
+        console.warn('[Onboarding] Zustand user missing! Falling back to authService.getSession()');
+        const { data } = await authService.getSession();
+        user = data?.session?.user ?? null;
+        userId = user?.id;
+      }
+
+      if (!userId) {
+        console.error('[Onboarding] FATAL: User ID missing after fallback. Session was lost.');
         Alert.alert('Session Expired', 'Please sign in again.');
         router.replace('/(auth)/welcome');
         return;

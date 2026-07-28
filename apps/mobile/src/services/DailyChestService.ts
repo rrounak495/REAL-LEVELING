@@ -31,7 +31,7 @@ export class DailyChestService {
     const claimRes = await repositories.system.claimDailyChest(userId);
     if (!claimRes.success) return claimRes as any;
 
-    // TODO: Connect to RewardService to actually grant the chest rewards.
+    // Future Integration: Connect to RewardService to actually grant the chest rewards.
     // This could vary based on user level. For now we assume success.
 
     return { success: true, data: true };

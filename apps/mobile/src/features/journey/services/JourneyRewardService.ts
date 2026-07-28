@@ -1,5 +1,3 @@
-import { repositories } from '@/db/repositories';
-
 export class JourneyRewardService {
   /**
    * Calculates and grants completion rewards for finishing an entire journey.

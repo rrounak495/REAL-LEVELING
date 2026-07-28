@@ -5,11 +5,9 @@ import { colors, spacing, radius, fontFamily } from '@/theme';
 import { type MissionRow } from '@/db/repositories/supabase/MissionRepository';
 import Animated, {
   useAnimatedStyle,
-  withSpring,
   useSharedValue,
   withTiming,
   withRepeat,
-  withSequence,
 } from 'react-native-reanimated';
 
 interface MissionCardProps {

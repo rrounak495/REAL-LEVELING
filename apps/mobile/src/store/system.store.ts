@@ -3,8 +3,6 @@ import { repositories } from '@/db/repositories';
 import {
   type SystemUserStateRow,
   type SystemMomentRow,
-  DailyChestStatus,
-  ComebackTier,
   type MomentType,
 } from '@/types/system.types';
 import { type SystemInsight, SystemInsightService } from '@/services/SystemInsightService';

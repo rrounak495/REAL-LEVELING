@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, Image } from 'react-native';
+import { View, Text } from 'react-native';
 import { useAuthStore } from '@/store/auth.store';
 import { RivalService } from '@/services/RivalService';
 // import { Target } from 'lucide-react-native'; // Native SVG crash

@@ -6,7 +6,6 @@
  */
 import { Tabs } from 'expo-router';
 import { FloatingTabBar } from '@/components/navigation/FloatingTabBar';
-import { colors } from '@theme';
 
 export default function TabsLayout() {
   return (

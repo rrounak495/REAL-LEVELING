@@ -18,6 +18,7 @@ import { AppTextInput } from '@/components/ui/TextInput';
 import { OAuthButton } from '@/components/ui/OAuthButton';
 import { GlassCard } from '@/components/ui/GlassCard';
 import { useLogin } from '@/features/auth/hooks/useLogin';
+import { useAuthStore } from '@/store/auth.store';
 import { colors, fontFamily } from '@theme';
 
 export default function LoginScreen() {
@@ -28,6 +29,25 @@ export default function LoginScreen() {
     setValue,
     formState: { errors },
   } = form;
+  const setSession = useAuthStore((s) => s.setSession);
+
+  const handleDevBypass = () => {
+    setSession({
+      access_token: 'dev-token',
+      refresh_token: 'dev-token',
+      expires_in: 3600,
+      expires_at: Math.floor(Date.now() / 1000) + 3600,
+      token_type: 'bearer',
+      user: {
+        id: '12345678-1234-1234-1234-123456789012',
+        app_metadata: {},
+        user_metadata: {},
+        aud: 'authenticated',
+        created_at: new Date().toISOString(),
+        email: 'testhunter@real-leveling.dev',
+      },
+    } as any);
+  };
 
   return (
     <ScreenContainer>
@@ -103,6 +123,16 @@ export default function LoginScreen() {
                 onPress={handleSubmit(submit)}
               >
                 Sign In
+              </Button>
+            </Animated.View>
+
+            <Animated.View entering={FadeInDown.delay(500)}>
+              <Button
+                size="lg"
+                style={{ marginTop: 12, backgroundColor: colors.semantic.success }}
+                onPress={handleDevBypass}
+              >
+                Bypass Login (Dev)
               </Button>
             </Animated.View>
           </GlassCard>

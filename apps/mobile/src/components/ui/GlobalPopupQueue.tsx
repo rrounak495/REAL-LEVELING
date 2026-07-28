@@ -9,7 +9,6 @@ import Animated, {
   withTiming,
   withSpring,
   runOnJS,
-  Easing,
 } from 'react-native-reanimated';
 import { usePopupStore } from '@/store/popup.store';
 import { colors, fontFamily, radius, spacing } from '@theme';

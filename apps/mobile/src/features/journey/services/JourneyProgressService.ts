@@ -1,5 +1,4 @@
 import { repositories } from '@/db/repositories';
-import { UserJourneyDayRow } from '@/db/repositories/supabase/JourneyRepository';
 
 export class JourneyProgressService {
   /**

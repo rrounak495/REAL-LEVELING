@@ -14,27 +14,42 @@ export class InventoryRepository implements IInventoryRepository {
 
   async getAllItems(): Promise<Result<Item[]>> {
     try {
-      const { data, error } = await this.supabase.from('inventory_items' as any).select('*');
+      const { data, error } = await this.supabase.from('inventory_items' as never).select('*');
 
       if (error) {
         return { success: false, error: new DatabaseError(error.message, error) };
       }
 
+      interface RawItem {
+        id: string;
+        name: string;
+        description: string;
+        lore?: string;
+        category: string;
+        rarity: string;
+        unlock_method: string;
+        required_level?: number;
+        required_rank?: string;
+        coin_price?: number;
+        gem_price?: number;
+        image_path?: string;
+      }
+
       return {
         success: true,
-        data: (data as any[]).map((row) => ({
+        data: (data as unknown as RawItem[]).map((row) => ({
           id: row.id,
           name: row.name,
           description: row.description,
-          lore: row.lore,
-          category: row.category,
-          rarity: row.rarity,
-          unlockMethod: row.unlock_method,
-          requiredLevel: row.required_level,
-          requiredRank: row.required_rank,
-          coinPrice: row.coin_price,
-          gemPrice: row.gem_price,
-          imagePath: row.image_path,
+          lore: row.lore || '',
+          category: row.category as any,
+          rarity: row.rarity as any,
+          unlockMethod: row.unlock_method as any,
+          requiredLevel: row.required_level ?? 1,
+          requiredRank: row.required_rank ?? null,
+          coinPrice: row.coin_price ?? 0,
+          gemPrice: row.gem_price ?? 0,
+          ...(row.image_path ? { imagePath: row.image_path } : {}),
         })),
       };
     } catch (e) {
@@ -46,7 +61,7 @@ export class InventoryRepository implements IInventoryRepository {
     try {
       // Get all owned items mapping
       const { data: ownedData, error: ownedError } = await this.supabase
-        .from('user_inventory' as any)
+        .from('user_inventory' as never)
         .select('item_id, acquired_at')
         .eq('user_id', userId);
 
@@ -54,7 +69,9 @@ export class InventoryRepository implements IInventoryRepository {
         return { success: false, error: new DatabaseError(ownedError.message, ownedError) };
       }
 
-      const ownedIds = new Set((ownedData as any[]).map((row) => row.item_id));
+      const ownedIds = new Set(
+        (ownedData as unknown as Record<string, unknown>[]).map((row) => row.item_id),
+      );
 
       // Fetch the actual item details
       const itemsRes = await this.getAllItems();

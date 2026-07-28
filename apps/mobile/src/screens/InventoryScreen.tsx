@@ -8,7 +8,7 @@ import { CategoryTabs } from '@/components/common/CategoryTabs';
 import { FilterBar } from '@/components/common/FilterBar';
 import { EmptyState } from '@/components/common/EmptyState';
 import { AvatarPreview } from '@/components/common/AvatarPreview';
-import { CosmeticCategory, type InventoryItem } from '@/types/inventory.types';
+import { type InventoryItem } from '@/types/inventory.types';
 
 const CATEGORIES = [
   'All',
@@ -38,7 +38,7 @@ export function InventoryScreen() {
     if (userId) {
       fetchInventory(userId);
     }
-  }, [userId]);
+  }, [userId, fetchInventory]);
 
   const filteredItems = items.filter((item) => {
     const matchesCategory = selectedCategory === 'All' || item.category === selectedCategory;

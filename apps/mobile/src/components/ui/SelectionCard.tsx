@@ -84,9 +84,9 @@ export function SelectionCard({
       <View style={styles.row}>
         {icon && <View style={styles.iconContainer}>{icon}</View>}
         <View style={styles.textContainer}>
-          <Text 
-            adjustsFontSizeToFit 
-            numberOfLines={1} 
+          <Text
+            adjustsFontSizeToFit
+            numberOfLines={1}
             style={[styles.title, isSelected && styles.selectedTitle]}
           >
             {title}

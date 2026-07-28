@@ -6,7 +6,7 @@
  */
 import { StyleSheet, Text, View, ScrollView } from 'react-native';
 import { GlassCard } from './GlassCard';
-import { colors, fontFamily, radius } from '@theme';
+import { colors, fontFamily } from '@theme';
 
 interface AchievementBadge {
   id: string;

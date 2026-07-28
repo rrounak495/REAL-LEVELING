@@ -1,8 +1,8 @@
 import { create } from 'zustand';
 import { repositories } from '@/db/repositories';
-import { type ShopItem, CosmeticCategory } from '@/types/inventory.types';
+import { type ShopItem } from '@/types/inventory.types';
 import { useInventoryStore } from './inventory.store';
-import { useAuthStore } from './auth.store'; // Assuming auth store exists for userId/coins/gems
+// Assuming auth store exists for userId/coins/gems
 
 interface ShopState {
   items: ShopItem[];

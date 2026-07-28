@@ -15,7 +15,7 @@ export class EquipmentRepository implements IEquipmentRepository {
 
       const { error } = await this.supabase
         .from('avatar_configs')
-        .update({ [dbSlotName]: itemId } as any)
+        .update({ [dbSlotName]: itemId } as never)
         .eq('id', userId);
 
       if (error) {

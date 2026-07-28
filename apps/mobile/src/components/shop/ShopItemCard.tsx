@@ -6,8 +6,6 @@ import Animated, {
   useAnimatedStyle,
   useSharedValue,
   withTiming,
-  withRepeat,
-  withSequence,
   FadeInUp,
 } from 'react-native-reanimated';
 // import { Lock } from 'lucide-react-native'; // Native SVG crash
