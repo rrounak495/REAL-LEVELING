@@ -8,6 +8,7 @@
  */
 import React from 'react';
 import { View, Text, Pressable, StyleSheet, Platform } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import * as Haptics from 'expo-haptics';
 import Animated, {
   useAnimatedStyle,
@@ -90,9 +91,17 @@ function TabItem({
  * which may not be installed as a direct dependency.
  * expo-router passes the same shape when using `tabBar={(props) => ...}`.
  */
+export function useBottomTabBarPadding() {
+  const insets = useSafeAreaInsets();
+  return 68 + (Platform.OS === 'android' ? 12 : 24) + insets.bottom + 16;
+}
+
 export function FloatingTabBar({ state, navigation }: any) {
+  const insets = useSafeAreaInsets();
+  const dynamicPaddingBottom = (Platform.OS === 'android' ? 12 : 24) + insets.bottom;
+
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { paddingBottom: dynamicPaddingBottom }]}>
       <View style={styles.bar}>
         {state.routes.map((route: any, index: number) => {
           const isFocused = state.index === index;
@@ -138,7 +147,6 @@ const styles = StyleSheet.create({
     bottom: 0,
     left: 0,
     right: 0,
-    paddingBottom: Platform.OS === 'android' ? 12 : 24,
     paddingHorizontal: 16,
     pointerEvents: 'box-none',
   },

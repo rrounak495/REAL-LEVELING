@@ -24,9 +24,9 @@ export default function AppLayout() {
     );
   }
 
-  // Not logged in — redirect to login
+  // Not logged in — redirect to welcome
   if (!isAuthenticated) {
-    return <Redirect href="/(auth)/login" />;
+    return <Redirect href="/(auth)/welcome" />;
   }
 
   const onboardingComplete = user?.user_metadata?.['onboarding_completed'] === true;

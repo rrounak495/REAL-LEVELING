@@ -36,6 +36,7 @@
     "expo-font": "~57.0.0",
     "expo-haptics": "~57.0.0",
     "expo-image-picker": "~57.0.2",
+    "expo-linear-gradient": "~57.0.1",
     "expo-linking": "~57.0.1",
     "expo-notifications": "~57.0.3",
     "expo-router": "~57.0.3",
@@ -57,7 +58,8 @@
     "zustand": "^5.0.14"
   },
   "overrides": {
-    "@types/react": "~19.1.0"
+    "@types/react": "~19.1.0",
+    "react": "19.2.3"
   },
   "devDependencies": {
     "@expo/ngrok": "^4.1.3",

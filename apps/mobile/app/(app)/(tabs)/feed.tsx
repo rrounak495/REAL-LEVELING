@@ -14,6 +14,7 @@ import { CreatePostModal } from '@/components/feed/CreatePostModal';
 import { colors, fontFamily, radius, spacing } from '@theme';
 import { useFeedStore } from '@/store/feed.store';
 import { type FeedPostRow } from '@/types/social.types';
+import { useBottomTabBarPadding } from '@/components/navigation/FloatingTabBar';
 
 const TYPE_COLORS: Record<string, string> = {
   level_up: 'rgba(168, 85, 247, 0.2)',
@@ -125,6 +126,7 @@ function FeedCard({
 }
 
 export default function FeedScreen() {
+  const bottomPadding = useBottomTabBarPadding();
   const { posts, isLoading, isRefreshing, fetchGlobalFeed, createPost } = useFeedStore();
   const [modalVisible, setModalVisible] = useState(false);
   const MOCK_USER_ID = 'mock-user-id'; // Replace with real auth user ID
@@ -207,7 +209,7 @@ export default function FeedScreen() {
               </Pressable>
             </Animated.View>
           }
-          contentContainerStyle={styles.listContent}
+          contentContainerStyle={[styles.listContent, { paddingBottom: bottomPadding }]}
           data={posts}
           keyExtractor={(item) => item.id}
           refreshControl={
@@ -258,7 +260,6 @@ const styles = StyleSheet.create({
   },
   listContent: {
     paddingHorizontal: spacing.screenHorizontal,
-    paddingBottom: 120,
   },
   separator: {
     height: 16,

@@ -9,6 +9,7 @@ import Animated, { FadeInDown, FadeInUp } from 'react-native-reanimated';
 import { GlassCard } from '@/components/ui/GlassCard';
 import { useProgressionStore } from '@/store/progression.store';
 import { useSocialStore } from '@/store/social.store';
+import { useBottomTabBarPadding } from '@/components/navigation/FloatingTabBar';
 import { colors, fontFamily, radius, spacing } from '@theme';
 
 interface LeaderboardEntry {
@@ -118,6 +119,7 @@ function LeaderboardRow({ entry, index }: { entry: LeaderboardEntry; index: numb
 }
 
 export default function RanksScreen() {
+  const bottomPadding = useBottomTabBarPadding();
   const [activeTab, setActiveTab] = useState(TABS[0]!);
   const [searchQuery, setSearchQuery] = useState('');
   const { currentLevel, currentRank } = useProgressionStore();
@@ -203,7 +205,7 @@ export default function RanksScreen() {
         </Animated.View>
 
         <ScrollView
-          contentContainerStyle={styles.scrollContent}
+          contentContainerStyle={[styles.scrollContent, { paddingBottom: bottomPadding }]}
           showsVerticalScrollIndicator={false}
         >
           {/* ── Search Bar ── */}
@@ -367,7 +369,6 @@ const styles = StyleSheet.create({
   scrollContent: {
     paddingHorizontal: spacing.screenHorizontal,
     paddingTop: 20,
-    paddingBottom: 120,
   },
 
   // ── Search ──

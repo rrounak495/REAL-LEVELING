@@ -12,9 +12,11 @@ import {
 } from '@/components/home';
 import { RewardOverlay } from '@/components/system/RewardOverlay';
 import { useDashboardStore } from '@/store';
+import { useBottomTabBarPadding } from '@/components/navigation/FloatingTabBar';
 
 export default function HomeScreen() {
   const insets = useSafeAreaInsets();
+  const bottomPadding = useBottomTabBarPadding();
 
   const {
     goal,
@@ -41,7 +43,7 @@ export default function HomeScreen() {
     <View style={[styles.screen, { paddingTop: insets.top }]}>
       <StatusBar style="light" />
       <ScrollView
-        contentContainerStyle={styles.scrollContent}
+        contentContainerStyle={[styles.scrollContent, { paddingBottom: bottomPadding }]}
         showsVerticalScrollIndicator={false}
         style={styles.scrollView}
       >
@@ -91,7 +93,6 @@ const styles = StyleSheet.create({
   },
   scrollContent: {
     paddingHorizontal: 20, // spacing.screen.horizontal
-    paddingBottom: 120, // ample bottom scroll space for floating UI
     paddingTop: 8,
   },
   sectionsContainer: {

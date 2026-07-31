@@ -35,6 +35,7 @@ import { useAchievementStore } from '@/store/achievement.store';
 import { useAuthStore } from '@/store/auth.store';
 
 import { useLiveProgress } from '@/features/progress/hooks/useLiveProgress';
+import { useBottomTabBarPadding } from '@/components/navigation/FloatingTabBar';
 import { colors, fontFamily, spacing, radius } from '@theme';
 
 
@@ -59,6 +60,7 @@ function mapTaskToCardData(task: CustomTask): TaskCardData {
 // ── Screen ───────────────────────────────────────────────────────────────────
 
 export default function TasksScreen() {
+  const bottomPadding = useBottomTabBarPadding();
   const { user } = useAuthStore();
   const { initialize } = useMissionStore();
   const { stats, fetchData: fetchAchievementData } = useAchievementStore();
@@ -155,7 +157,7 @@ export default function TasksScreen() {
       <StatusBar style="light" />
       <View style={styles.screen}>
         <ScrollView
-          contentContainerStyle={styles.scrollContent}
+          contentContainerStyle={[styles.scrollContent, { paddingBottom: bottomPadding }]}
           showsVerticalScrollIndicator={false}
         >
           {/* ═══ EXISTING HEADER — PRESERVED EXACTLY ═══ */}
@@ -313,7 +315,7 @@ export default function TasksScreen() {
         </ScrollView>
 
         {/* ═══ FAB "+" Button (Absolute) ═══ */}
-        <View style={styles.fabContainer}>
+        <View style={[styles.fabContainer, { bottom: bottomPadding }]}>
           <Pressable
             accessibilityLabel="Add new task"
             accessibilityRole="button"
@@ -341,7 +343,6 @@ const styles = StyleSheet.create({
   scrollContent: {
     paddingHorizontal: spacing.screenHorizontal,
     paddingTop: 56,
-    paddingBottom: 120,
   },
 
   // ── Header (Preserved) ──
@@ -489,7 +490,6 @@ const styles = StyleSheet.create({
   // ── FAB (Sprint 2) ──
   fabContainer: {
     position: 'absolute',
-    bottom: 32,
     right: 24,
     zIndex: 10,
   },
