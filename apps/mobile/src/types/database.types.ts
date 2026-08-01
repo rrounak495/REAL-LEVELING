@@ -972,6 +972,10 @@ export type Database = {
           onboarding_completed_at: string | null;
           timezone: string | null;
           training_location: string;
+          onboarding_status: string | null;
+          experience_level: string | null;
+          primary_goal_category: string | null;
+          premium_status: string | null;
           updated_at: string;
           username: string;
         };
@@ -990,6 +994,10 @@ export type Database = {
           onboarding_completed_at?: string | null;
           timezone?: string | null;
           training_location?: string;
+          onboarding_status?: string | null;
+          experience_level?: string | null;
+          primary_goal_category?: string | null;
+          premium_status?: string | null;
           updated_at?: string;
           username: string;
         };
@@ -1008,6 +1016,10 @@ export type Database = {
           onboarding_completed_at?: string | null;
           timezone?: string | null;
           training_location?: string;
+          onboarding_status?: string | null;
+          experience_level?: string | null;
+          primary_goal_category?: string | null;
+          premium_status?: string | null;
           updated_at?: string;
           username?: string;
         };

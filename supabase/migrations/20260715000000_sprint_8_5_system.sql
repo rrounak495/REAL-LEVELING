@@ -23,7 +23,7 @@ CREATE POLICY "System can insert state" ON public.system_user_state FOR INSERT W
 
 -- 2. System Moments Queue
 CREATE TABLE IF NOT EXISTS public.system_moments_queue (
-  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   user_id UUID REFERENCES auth.users(id) ON DELETE CASCADE NOT NULL,
   priority INT DEFAULT 10,
   moment_type TEXT NOT NULL, -- e.g., 'level_up', 'boss_defeat', 'chest_ready'
@@ -40,7 +40,7 @@ CREATE POLICY "Users can insert moments" ON public.system_moments_queue FOR INSE
 
 -- 3. Personal Records
 CREATE TABLE IF NOT EXISTS public.personal_records (
-  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   user_id UUID REFERENCES auth.users(id) ON DELETE CASCADE NOT NULL,
   activity_type TEXT NOT NULL, -- 'pushups', 'running_km', 'plank_seconds', etc.
   record_value NUMERIC NOT NULL,
@@ -58,7 +58,7 @@ CREATE POLICY "Users can update records" ON public.personal_records FOR UPDATE U
 
 -- 4. Rivals
 CREATE TABLE IF NOT EXISTS public.rivals (
-  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   user_id UUID REFERENCES auth.users(id) ON DELETE CASCADE NOT NULL,
   rival_user_id UUID REFERENCES auth.users(id) ON DELETE CASCADE NOT NULL,
   is_pinned BOOLEAN DEFAULT false,

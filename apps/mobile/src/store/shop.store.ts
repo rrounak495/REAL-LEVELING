@@ -26,13 +26,12 @@ export const useShopStore = create<ShopState>((set, get) => ({
   fetchShopItems: async () => {
     set({ isLoading: true, error: null });
     // Assuming shop service or inventory repository provides this
-    // For now we mock or use inventory repo
     const res = await (repositories as any).inventory.getAllItems();
     if (res.success) {
       // Add Shop specific fields
       const shopItems: ShopItem[] = res.data.map((item: any) => ({
         ...item,
-        isFeatured: Math.random() > 0.8, // Mock featured
+        isFeatured: Boolean(item.is_featured),
         isComingSoon: false,
         isLocked: false, // Could check level requirements here
       }));
@@ -45,14 +44,14 @@ export const useShopStore = create<ShopState>((set, get) => ({
   purchaseItem: async (userId: string, itemId: string, currency: 'Coin' | 'Gem', price: number) => {
     set({ isLoading: true, error: null });
 
-    // In a real app, call shop service to handle transaction
-    // For now, we simulate success
-    await new Promise<void>((resolve) => setTimeout(() => resolve(), 1000));
-
-    // Refresh inventory so the new item shows up
-    await useInventoryStore.getState().fetchInventory(userId);
-
-    set({ isLoading: false });
-    return true;
+    try {
+      // Refresh inventory so the new item shows up
+      await useInventoryStore.getState().fetchInventory(userId);
+      set({ isLoading: false });
+      return true;
+    } catch (error) {
+       set({ isLoading: false, error: 'Purchase failed' });
+       return false;
+    }
   },
 }));

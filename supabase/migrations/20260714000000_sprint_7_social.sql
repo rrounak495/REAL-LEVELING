@@ -13,7 +13,7 @@ CREATE POLICY "Users can delete their own objects" ON storage.objects FOR DELETE
 
 -- 2. Follows Table (One-way relationship)
 CREATE TABLE public.follows (
-    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     follower_id UUID NOT NULL REFERENCES auth.users(id) ON DELETE CASCADE,
     following_id UUID NOT NULL REFERENCES auth.users(id) ON DELETE CASCADE,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL,
@@ -30,7 +30,7 @@ CREATE POLICY "Users can unfollow" ON public.follows FOR DELETE USING (auth.uid(
 CREATE TYPE friendship_status AS ENUM ('pending', 'accepted', 'blocked');
 
 CREATE TABLE public.friendships (
-    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     user_id UUID NOT NULL REFERENCES auth.users(id) ON DELETE CASCADE,
     friend_id UUID NOT NULL REFERENCES auth.users(id) ON DELETE CASCADE,
     status friendship_status DEFAULT 'pending' NOT NULL,
@@ -50,7 +50,7 @@ CREATE POLICY "Users can delete friendships" ON public.friendships FOR DELETE US
 CREATE TYPE post_type AS ENUM ('standard_post', 'level_up', 'workout', 'boss', 'achievement');
 
 CREATE TABLE public.feed_posts (
-    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     user_id UUID NOT NULL REFERENCES auth.users(id) ON DELETE CASCADE,
     type post_type DEFAULT 'standard_post' NOT NULL,
     content TEXT,
@@ -74,7 +74,7 @@ CREATE POLICY "Users can delete their own posts" ON public.feed_posts FOR DELETE
 CREATE TYPE reaction_type AS ENUM ('fire', 'power', 'respect', 'lightning', 'heart');
 
 CREATE TABLE public.post_reactions (
-    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     post_id UUID NOT NULL REFERENCES public.feed_posts(id) ON DELETE CASCADE,
     user_id UUID NOT NULL REFERENCES auth.users(id) ON DELETE CASCADE,
     reaction reaction_type DEFAULT 'fire' NOT NULL,
@@ -107,7 +107,7 @@ FOR EACH ROW EXECUTE FUNCTION update_post_likes_count();
 
 -- 6. Post Comments
 CREATE TABLE public.post_comments (
-    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     post_id UUID NOT NULL REFERENCES public.feed_posts(id) ON DELETE CASCADE,
     user_id UUID NOT NULL REFERENCES auth.users(id) ON DELETE CASCADE,
     parent_id UUID REFERENCES public.post_comments(id) ON DELETE CASCADE, -- For replies
@@ -144,7 +144,7 @@ FOR EACH ROW EXECUTE FUNCTION update_post_comments_count();
 CREATE TYPE notification_type AS ENUM ('friend_request', 'friend_accepted', 'new_follower', 'post_like', 'post_comment', 'comment_reply');
 
 CREATE TABLE public.notifications (
-    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     user_id UUID NOT NULL REFERENCES auth.users(id) ON DELETE CASCADE, -- Recipient
     actor_id UUID NOT NULL REFERENCES auth.users(id) ON DELETE CASCADE, -- Sender/Actor
     type notification_type NOT NULL,

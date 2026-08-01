@@ -4,7 +4,7 @@
 
 -- 1. Bosses Table
 CREATE TABLE public.bosses (
-  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   name TEXT NOT NULL,
   title TEXT,
   lore TEXT,
@@ -27,7 +27,7 @@ CREATE INDEX idx_bosses_dates ON public.bosses(start_time, end_time);
 
 -- 2. Boss Phases Table
 CREATE TABLE public.boss_phases (
-  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   boss_id UUID NOT NULL REFERENCES public.bosses(id) ON DELETE CASCADE,
   phase_name TEXT NOT NULL,
   hp_threshold_pct INT NOT NULL, -- 70 means triggers when HP <= 70%
@@ -40,7 +40,7 @@ CREATE INDEX idx_boss_phases_boss_id ON public.boss_phases(boss_id);
 
 -- 3. Boss Objectives Table
 CREATE TABLE public.boss_objectives (
-  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   boss_id UUID NOT NULL REFERENCES public.bosses(id) ON DELETE CASCADE,
   activity_type TEXT NOT NULL, -- 'pushup', 'squat', 'running', etc.
   base_damage DECIMAL(8,2) NOT NULL, -- Server-side config for damage
@@ -50,7 +50,7 @@ CREATE INDEX idx_boss_objectives_boss_id ON public.boss_objectives(boss_id);
 
 -- 4. Boss Participants Table
 CREATE TABLE public.boss_participants (
-  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   boss_id UUID NOT NULL REFERENCES public.bosses(id) ON DELETE CASCADE,
   user_id UUID NOT NULL REFERENCES auth.users(id) ON DELETE CASCADE,
   total_damage BIGINT NOT NULL DEFAULT 0,
@@ -63,7 +63,7 @@ CREATE INDEX idx_boss_participants_user_damage ON public.boss_participants(boss_
 
 -- 5. Boss Contributions Table (Idempotent tracking)
 CREATE TABLE public.boss_contributions (
-  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   boss_id UUID NOT NULL REFERENCES public.bosses(id) ON DELETE CASCADE,
   user_id UUID NOT NULL REFERENCES auth.users(id) ON DELETE CASCADE,
   objective_id UUID NOT NULL REFERENCES public.boss_objectives(id) ON DELETE CASCADE,
@@ -78,7 +78,7 @@ CREATE INDEX idx_boss_contributions_user ON public.boss_contributions(user_id, b
 
 -- 6. Boss Reward Rules Table
 CREATE TABLE public.boss_reward_rules (
-  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   boss_id UUID NOT NULL REFERENCES public.bosses(id) ON DELETE CASCADE,
   condition_type TEXT NOT NULL, -- 'participation', 'damage_milestone', 'top_rank', 'final_hit', 'defeat'
   condition_value TEXT, -- e.g. "2500" for damage, "100" for rank
@@ -90,7 +90,7 @@ CREATE TABLE public.boss_reward_rules (
 
 -- 7. Boss Reward Claims Table
 CREATE TABLE public.boss_reward_claims (
-  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   rule_id UUID NOT NULL REFERENCES public.boss_reward_rules(id) ON DELETE CASCADE,
   user_id UUID NOT NULL REFERENCES auth.users(id) ON DELETE CASCADE,
   claimed_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),

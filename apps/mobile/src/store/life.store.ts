@@ -1,4 +1,5 @@
 import { create } from 'zustand';
+import { supabase } from '../lib/supabase';
 
 export interface HunterPassport {
   hunterId: string;
@@ -94,113 +95,46 @@ export const useLifeStore = create<LifeState>((set, get) => ({
   initializeLifeEngine: async (userId: string) => {
     set({ isLoading: true });
 
-    // In a real implementation, we would fetch from repositories.life
-    // For now, we seed with mock data to build the frontend
-    const mockPassport: HunterPassport = {
-      hunterId: `HNT-${userId.substring(0, 8).toUpperCase()}`,
-      hunterSince: new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString(), // 30 days ago
-      region: 'Earth - Sector 4',
-      lifetimeTitle: 'The Awakened',
-    };
+    try {
+      const { data: profile } = await supabase
+        .from('profiles')
+        .select('*')
+        .eq('id', userId)
+        .single();
 
-    const mockStats: LifeStatistics = {
-      totalWorkoutDays: 24,
-      totalRecoveryDays: 6,
-      totalBossesDefeated: 3,
-      totalJourneyDays: 30,
-      lifetimeTrainingTimeMinutes: 1440,
-      lifetimeDistanceKm: 42,
-      totalCaloriesBurned: 12500,
-      personalRecordsCount: 5,
-    };
+      if (profile) {
+        set({
+          passport: {
+            hunterId: `HNT-${userId.substring(0, 8).toUpperCase()}`,
+            hunterSince: profile.created_at,
+            region: profile.country || 'Global',
+            lifetimeTitle: profile.experience_level || 'The Awakened',
+          }
+        });
+      }
 
-    const mockDiary: DiaryEntry[] = [
-      {
-        id: '1',
-        date: new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString(),
-        type: 'journey_started',
-        content: 'SYSTEM\nFirst Journey Started.',
-      },
-      {
-        id: '2',
-        date: new Date(Date.now() - 25 * 24 * 60 * 60 * 1000).toISOString(),
-        type: 'boss_defeated',
-        content: 'SYSTEM\nShadow Wolf Defeated.',
-      },
-      {
-        id: '3',
-        date: new Date(Date.now() - 20 * 24 * 60 * 60 * 1000).toISOString(),
-        type: 'rank_up',
-        content: 'SYSTEM\nHunter reached Rank Bronze today.',
-      },
-      {
-        id: '4',
-        date: new Date(Date.now() - 5 * 24 * 60 * 60 * 1000).toISOString(),
-        type: 'personal_record',
-        content: 'SYSTEM\nNew PR: 50 Push-ups unbroken.',
-      },
-    ];
+      // We'll leave stats and diary as empty until their specific repositories are integrated
+      set({
+        statistics: {
+          totalWorkoutDays: 0,
+          totalRecoveryDays: 0,
+          totalBossesDefeated: 0,
+          totalJourneyDays: 0,
+          lifetimeTrainingTimeMinutes: 0,
+          lifetimeDistanceKm: 0,
+          totalCaloriesBurned: 0,
+          personalRecordsCount: 0,
+        },
+        diary: [],
+        trophies: [],
+        memories: [],
+      });
 
-    const mockTrophies: Trophy[] = [
-      {
-        id: 't1',
-        type: 'journey_badge',
-        name: 'First Awakening',
-        description: 'Complete your first Journey.',
-        unlockedAt: new Date().toISOString(),
-        icon: '🎖️',
-      },
-      {
-        id: 't2',
-        type: 'boss_trophy',
-        name: 'Wolf Bane',
-        description: 'Defeat the Shadow Wolf.',
-        unlockedAt: new Date().toISOString(),
-        icon: '🐺',
-      },
-      {
-        id: 't3',
-        type: 'rank_badge',
-        name: 'Bronze Hunter',
-        description: 'Reach Bronze Rank.',
-        unlockedAt: new Date().toISOString(),
-        icon: '🥉',
-      },
-      {
-        id: 't4',
-        type: 'evolution_badge',
-        name: 'Warrior',
-        description: 'Evolve to Warrior stage.',
-        unlockedAt: null,
-        icon: '⚔️',
-      }, // Locked
-    ];
-
-    const mockMemories: MemoryEntry[] = [
-      {
-        id: 'm1',
-        type: 'journey_completed',
-        title: 'The Awakening Journey',
-        date: new Date(Date.now() - 10 * 24 * 60 * 60 * 1000).toISOString(),
-        details: '30 Days of foundational strength and conditioning.',
-      },
-      {
-        id: 'm2',
-        type: 'boss_victory',
-        title: 'Victory over Shadow Wolf',
-        date: new Date(Date.now() - 25 * 24 * 60 * 60 * 1000).toISOString(),
-        details: 'Contributed 25,000 Damage to the Global Raid.',
-      },
-    ];
-
-    set({
-      passport: mockPassport,
-      statistics: mockStats,
-      diary: mockDiary,
-      trophies: mockTrophies,
-      memories: mockMemories,
-      isLoading: false,
-    });
+    } catch (error) {
+      console.error('Error initializing life engine:', error);
+    } finally {
+      set({ isLoading: false });
+    }
   },
 
   addDiaryEntry: (type, content) => {

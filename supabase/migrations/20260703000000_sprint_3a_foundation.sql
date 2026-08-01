@@ -1,3 +1,5 @@
+CREATE EXTENSION IF NOT EXISTS pgcrypto;
+
 -- Sprint 3A Foundation Migration
 -- Creates the 5 core tables for the backend schema:
 -- profiles, user_settings, skill_categories, skills, user_skills.

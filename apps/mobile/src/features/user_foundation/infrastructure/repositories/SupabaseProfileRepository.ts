@@ -19,7 +19,6 @@ export class SupabaseProfileRepository implements IUserProfileRepository {
 
     return {
       id: data.id,
-      email: data.email,
       displayName: data.display_name,
       avatarUrl: data.avatar_url,
       onboardingStatus: data.onboarding_status,
@@ -34,7 +33,7 @@ export class SupabaseProfileRepository implements IUserProfileRepository {
   async saveProfile(profile: UserProfile): Promise<void> {
     const { error } = await this.supabase.from('profiles').upsert({
       id: profile.id,
-      email: profile.email,
+      username: `hunter_${profile.id.substring(0, 8)}`,
       display_name: profile.displayName,
       avatar_url: profile.avatarUrl,
       onboarding_status: profile.onboardingStatus,

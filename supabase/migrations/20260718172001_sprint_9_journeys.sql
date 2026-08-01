@@ -1,6 +1,6 @@
 -- Create user_journeys table
 CREATE TABLE IF NOT EXISTS public.user_journeys (
-    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     user_id UUID NOT NULL REFERENCES public.profiles(id) ON DELETE CASCADE,
     status TEXT NOT NULL DEFAULT 'active',
     goal TEXT NOT NULL,
@@ -15,7 +15,7 @@ CREATE TABLE IF NOT EXISTS public.user_journeys (
 
 -- Create user_journey_days table
 CREATE TABLE IF NOT EXISTS public.user_journey_days (
-    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     journey_id UUID NOT NULL REFERENCES public.user_journeys(id) ON DELETE CASCADE,
     day_number INTEGER NOT NULL,
     day_type TEXT,
